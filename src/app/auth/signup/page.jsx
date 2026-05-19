@@ -9,8 +9,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const SignUpPage = () => {
-            const noop = () =>(close) => {
-                close()};
+           const noop = (close) => close();
             const router = useRouter();
 
     const [password, setPassword] = useState('');
@@ -37,7 +36,7 @@ const SignUpPage = () => {
         });
 
        if (error) {
-    toast.error("Error: " + (error.message || "Something went wrong!"));
+    toast.danger("Error: " + (error.message || "Something went wrong!"));
 } else {
     toast.success("Registration successful! Welcome to Pawsy.", {
         actionProps: {

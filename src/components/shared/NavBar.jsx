@@ -136,7 +136,7 @@ const Navbar = () => {
 
 
      <div  className='flex gap-2.5'>
-      <Link href="/auth/login">
+      <Link href="/auth/signin">
     <button className="text-[#3D2516] border-2 border-[#3D2516] hover:bg-[#3D2516] hover:text-[#FFEFD5] font-bold px-5 py-2 rounded-xl transition-all duration-300 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
       Sign In <FaPaw className="text-[10px] sm:text-xs" />
     </button>

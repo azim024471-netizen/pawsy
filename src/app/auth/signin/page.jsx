@@ -9,7 +9,6 @@ import { FaPaw } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 
 const SignInPage = () => {
-           const noop = (close) => close();
 
   const router = useRouter();
 
@@ -23,7 +22,6 @@ const SignInPage = () => {
     email: email, 
     password: password, 
     rememberMe: true,
-    callbackURL: "/",
 });
            
       
@@ -33,16 +31,15 @@ const SignInPage = () => {
         } else {
             toast.success("Login successful! Welcome back to Pawsy.", {
     actionProps: {
-        children: "Close",
         className: "bg-success text-success-foreground",
-        onPress: noop,
+       
     },
     description: "You have logged in successfully.",
 });
 
         router.push("/");}
 
-        console.log(data, error, 'data from  mongo')
+        // console.log(data, error, 'data from  mongo')
     };
 
     return (

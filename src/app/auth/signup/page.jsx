@@ -32,7 +32,6 @@ const SignUpPage = () => {
             email: email,
             password: pass,
             image: image,
-            callbackURL: "/",
         });
 
        if (error) {
@@ -49,7 +48,7 @@ const SignUpPage = () => {
 
 router.push("/");}
 
-        // console.log(data, 'data from  mongo')
+        console.log(data, 'data from  mongo signup success')
     };
     
     return (

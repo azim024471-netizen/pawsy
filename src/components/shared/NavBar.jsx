@@ -46,7 +46,7 @@ indicator: true,
 
         const user = session?.user;
 
-  console.log(user, isPending, 'from navvvvvvvvvvvvvvvv')
+  // console.log(user, isPending, 'from navvvvvvvvvvvvvvvv')
 
 
   const dropdownRef = useRef(null);
@@ -104,7 +104,7 @@ indicator: true,
             {user && (
               <>
              
-                <Link href="/dashboard/add-pet" className={navLinkClass('/dashboard/add-pet')}>
+                <Link href="/add-pets" className={navLinkClass('/add-pets')}>
                   Add Pet
                 </Link>
               </>

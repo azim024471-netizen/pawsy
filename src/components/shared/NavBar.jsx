@@ -158,7 +158,7 @@ indicator: true,
                     </Link>
                     
                     <Link
-                      href="/dashboard"
+                      href="/dashboard/listings"
                       onClick={() => setDropdownOpen(false)}
                       className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-[#3D2516] hover:bg-[#FFEFD5]/40 transition-colors"
                     >

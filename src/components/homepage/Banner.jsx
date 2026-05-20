@@ -85,7 +85,7 @@ const Banner = () => {
                   />
                   
                   <div className="absolute bottom-10 left-0 right-0 text-center bg-white/20 backdrop-blur-md py-2">
-                    <span className="text-white font-bold text-sm tracking-widest">WATING FOR YOU</span>
+                    <span className="text-white font-bold text-sm tracking-widest">WAITING FOR YOU</span>
                   </div>
                 </div>
 

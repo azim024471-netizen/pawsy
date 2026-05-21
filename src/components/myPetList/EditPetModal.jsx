@@ -1,30 +1,72 @@
 "use client";
 import React from "react";
-import { Button, FieldError, Form, Input, Label, Modal, TextArea, TextField} from "@heroui/react";
+import { Button, FieldError, Form, Input, Label, Modal, TextArea, TextField, toast} from "@heroui/react";
 import {MdOutlineCategory, MdOutlineVaccines, MdOutlineWc} from "react-icons/md";
 import { FaEdit, FaPaw } from "react-icons/fa";
 import { CgEditContrast } from "react-icons/cg";
+import { useRouter } from "next/navigation";
 
 
-const EditPetModal = ({pet}) => {
+const EditPetModal =  ({pet}) => { 
+  const router = useRouter();
 
           const {_id,petName, description, species,breed,age, gender, image,
             healthStatus,vaccinationStatus, location, adoptionFee } = pet;
         
-            console.log(pet, 'from updatae modal page')
+            // console.log(pet, 'from updatae modal page')
 
-  const onSubmit = (e) => {
+  const onSubmit = async(e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
+    const updateData = Object.fromEntries(formData);
+    console.log(updateData, 'from  edit modal form');
+    
 
-    const data = Object.fromEntries(formData);
 
-    console.log(data);
+  try {
+           
+    const res = await fetch(`http://localhost:1234/allpets/${_id}`, {
+      method : "PATCH",
+       headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updateData)
+    }) ;
+    
+ const data = await res.json();
+ console.log(data, 'data after upateeeeeeeeeeeeeeeeee')
+
+            if (data.modifiedCount > 0) {
+                toast.success("Pet Updated", {
+                   description: `You have successfully update ${petName}'s info.`,
+                    actionProps: {
+                        children: "Close",
+                        // onPress: noop,
+                        variant: "flat",
+                    },
+                });
+                
+                router.push('/dashboard/listings');
+                router.refresh();
+            } else {
+                toast.warning("Could No Update", {
+                    description: "You have to change al last one thing to update.",
+                });
+            }
+
+        } catch(error){
+            toast.danger("Action Failed", {
+                    description: "Something went wrong. Please check your internet connection or try again later.",
+                    indicator: true,
+                        });
+
+                        }
   };
 
-  const selectStyle = "w-full bg-transparent text-black rounded-xl text-sm outline-none border-none cursor-pointer pr-2";
 
+
+
+
+  const selectStyle = "w-full bg-transparent text-black rounded-xl text-sm outline-none border-none cursor-pointer pr-2";
   const selectContainerStyle =
     "flex items-center gap-2 px-3 bg-[#eecbb3] border border-white/10 rounded-xl h-11 focus-within:border-[#FFEFD5]/40 transition-all w-full";
 

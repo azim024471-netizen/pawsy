@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React from 'react';
 import { FaEye,  FaTrash, FaClipboardList, FaMapMarkerAlt, FaPaw } from 'react-icons/fa';
 import EditPetModal from './EditPetModal';
+import DeletePetModal from './DeletePetModal';
 
 const PetListCard = ({ pet }) => {
 
@@ -91,14 +92,9 @@ const PetListCard = ({ pet }) => {
             
                       <EditPetModal pet={pet}></EditPetModal>
  
-                    <button
-                        className="w-full bg-white/5 hover:bg-red-600 text-[#FFEFD5] hover:text-white 
-                        font-bold py-1.5 rounded-lg transition-all border border-red-600/30 flex items-center
-                         justify-center gap-1 text-[11px] active:scale-[0.97]"
-                    >
-                        <FaTrash className="text-red-400 text-xs" />
-                        Delete
-                    </button>
+                  
+
+                    <DeletePetModal pet={pet}></DeletePetModal>
 
                 </div>
             </div>

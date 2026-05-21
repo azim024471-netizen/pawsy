@@ -6,45 +6,45 @@ import { usePathname, useRouter } from 'next/navigation';
 import { FaPaw, FaChevronDown, FaTachometerAlt, FaSignOutAlt } from 'react-icons/fa';
 import Image from 'next/image';
 import { authClient } from '@/lib/auth-client';
-import {  Avatar, toast } from '@heroui/react';
+import { Avatar, toast } from '@heroui/react';
 
 const Navbar = () => {
 
-            const router = useRouter();
-
-  
-    const handelSignOut = async () => {
-      setDropdownOpen(false);
-        try {
-            await authClient.signOut();
-            
-            router.push('/');
-
- toast.success('Sign Out Successful!!!', {
- description: "You have been logged out successfully.",
-indicator: true,
-                    })
+  const router = useRouter();
 
 
-          
-        } catch (error) {
+  const handelSignOut = async () => {
+    setDropdownOpen(false);
+    try {
+      await authClient.signOut();
 
-            toast.danger('Sign Out Failed!', {
+      router.push('/');
+
+      toast.success('Sign Out Successful!!!', {
+        description: "You have been logged out successfully.",
+        indicator: true,
+      })
+
+
+
+    } catch (error) {
+
+      toast.danger('Sign Out Failed!', {
         description: error.message || "Something went wrong during sign out.",
         indicator: true,
-    });
+      });
 
-        }
-    };
-  
+    }
+  };
 
-  const { 
-        data: session, 
-        isPending,
-    } = authClient.useSession() 
-     
 
-        const user = session?.user;
+  const {
+    data: session,
+    isPending,
+  } = authClient.useSession()
+
+
+  const user = session?.user;
 
   // console.log(user, isPending, 'from navvvvvvvvvvvvvvvv')
 
@@ -54,18 +54,17 @@ indicator: true,
   const pathname = usePathname();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  
+
   const isActive = (href) => pathname === href;
 
   const navLinkClass = (href) =>
-    `transition-all font-semibold text-xs sm:text-sm whitespace-nowrap pb-0.5 border-b-2 ${
-      isActive(href)
-        ? 'text-[#3D2516] border-[#3D2516]'
-        : 'text-[#3D2516]/70 hover:text-[#3D2516] border-transparent'
+    `transition-all font-semibold text-xs sm:text-sm whitespace-nowrap pb-0.5 border-b-2 ${isActive(href)
+      ? 'text-[#3D2516] border-[#3D2516]'
+      : 'text-[#3D2516]/70 hover:text-[#3D2516] border-transparent'
     }`;
 
 
- useEffect(() => {
+  useEffect(() => {
     const handler = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setDropdownOpen(false);
@@ -80,10 +79,10 @@ indicator: true,
     <nav className="bg-[#FFEFD5] border-b border-[#3D2516]/10 text-[#3D2516] sticky top-0 z-50 backdrop-blur-md bg-opacity-95 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
- 
 
- {/* left ///////////// */}
-          <div  className="flex items-center gap-2 group select-none">
+
+          {/* left ///////////// */}
+          <div className="flex items-center gap-2 group select-none">
 
             <div className="p-1.5 rounded-xl transition-transform duration-300 group-hover:scale-110">
               <Image src="/paw.png" alt="pawsy" height={46} width={46} className="object-contain" />
@@ -96,14 +95,14 @@ indicator: true,
             </div>
 
           </div>
-      
-      {/* midddle link ////////// */}
+
+          {/* midddle link ////////// */}
           <div className="flex items-center gap-5 sm:gap-8 overflow-x-auto no-scrollbar py-2 max-w-[60%] sm:max-w-none">
             <Link href="/" className={navLinkClass('/')}>Home</Link>
             <Link href="/all-pets" className={navLinkClass('/all-pets')}>All Pets</Link>
             {user && (
               <>
-             
+
                 <Link href="/add-pets" className={navLinkClass('/add-pets')}>
                   Add Pet
                 </Link>
@@ -121,17 +120,17 @@ indicator: true,
                   onClick={() => setDropdownOpen((prev) => !prev)}
                   className="flex items-center gap-2 hover:bg-[#3D2516]/5 px-3 py-2 rounded-xl transition-all 
                   duration-200 "
-                >   
+                >
 
 
-                   <Avatar size="md">
-        <Avatar.Image
-        referrerPolicy='no-referrer'
-          alt="Medium Avatar"
-          src={user.image}
-        />
-        <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
-      </Avatar>
+                  <Avatar size="md">
+                    <Avatar.Image
+                      referrerPolicy='no-referrer'
+                      alt="Medium Avatar"
+                      src={user.image}
+                    />
+                    <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
+                  </Avatar>
                   <span className="hidden sm:block text-sm font-bold max-w-30 truncate">
                     {user.name}
                   </span>
@@ -145,9 +144,9 @@ indicator: true,
                   <div className="absolute right-0 mt-2 w-52 bg-white border border-[#3D2516]/10 rounded-2xl shadow-xl overflow-hidden py-1 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                     <div className="px-4 py-3 border-b border-stone-100">
                       <p className="text-sm font-bold text-[#3D2516] truncate">{user.name}</p>
-                        <p className="text-xs text-stone-400 truncate mt-0.5">{user.email}</p>
+                      <p className="text-xs text-stone-400 truncate mt-0.5">{user.email}</p>
                     </div>
-                    
+
                     <Link
                       href="/dashboard"
                       onClick={() => setDropdownOpen(false)}
@@ -156,17 +155,16 @@ indicator: true,
                       <FaTachometerAlt className="text-xs opacity-70" />
                       Dashboard
                     </Link>
-                    
+
                     <Link
                       href="/dashboard/listings"
                       onClick={() => setDropdownOpen(false)}
                       className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-[#3D2516] hover:bg-[#FFEFD5]/40 transition-colors"
                     >
                       <FaTachometerAlt className="text-xs opacity-70" />
-                My Requests
-                    </Link>
+                      My Listings                    </Link>
 
-                       
+
 
 
                     <button
@@ -179,28 +177,28 @@ indicator: true,
                   </div>
                 )}
               </div>
-            ) 
-            
-            : (
-              <>
+            )
+
+              : (
+                <>
 
 
-     <div  className='flex gap-2.5'>
-      <Link href="/auth/signin">
-    <button className="text-[#3D2516] border-2 border-[#3D2516] hover:bg-[#3D2516] hover:text-[#FFEFD5] font-bold px-5 py-2 rounded-xl transition-all duration-300 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
-      Sign In <FaPaw className="text-[10px] sm:text-xs" />
-    </button>
-  </Link>
+                  <div className='flex gap-2.5'>
+                    <Link href="/auth/signin">
+                      <button className="text-[#3D2516] border-2 border-[#3D2516] hover:bg-[#3D2516] hover:text-[#FFEFD5] font-bold px-5 py-2 rounded-xl transition-all duration-300 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
+                        Sign In <FaPaw className="text-[10px] sm:text-xs" />
+                      </button>
+                    </Link>
 
-  <Link href="/auth/signup">
-    <button className="bg-[#3D2516] text-[#FFEFD5] hover:bg-[#52321E] font-bold px-5 py-2.5 rounded-xl transition-all duration-300 text-xs sm:text-sm shadow-sm flex items-center gap-2 whitespace-nowrap">
-      Sign Up <FaPaw className="text-[10px] sm:text-xs" />
-    </button>
-  </Link>
-     </div>
+                    <Link href="/auth/signup">
+                      <button className="bg-[#3D2516] text-[#FFEFD5] hover:bg-[#52321E] font-bold px-5 py-2.5 rounded-xl transition-all duration-300 text-xs sm:text-sm shadow-sm flex items-center gap-2 whitespace-nowrap">
+                        Sign Up <FaPaw className="text-[10px] sm:text-xs" />
+                      </button>
+                    </Link>
+                  </div>
 
-     </>
-            )}
+                </>
+              )}
           </div>
 
         </div>

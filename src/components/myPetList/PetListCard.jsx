@@ -76,8 +76,10 @@ const PetListCard = ({ pet }) => {
                             Requests
                         </button>
                     </Link>
+ 
+           
 
-                    <Link href={`/pet-details/${_id}`} className="w-full">
+                    <Link href={`/all-pets/${_id}`} className="w-full">
                         <button className="w-full bg-white/5 hover:bg-green-600 text-[#FFEFD5
                          hover:text-white font-bold py-1.5 rounded-lg transition-all border border-green-900 
                          flex items-center justify-center gap-1 text-[11px] active:scale-[0.97]">

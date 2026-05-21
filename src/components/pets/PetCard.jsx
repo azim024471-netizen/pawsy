@@ -95,11 +95,13 @@ const PetCard = ({ pet }) => {
                     </div>
 
                     <div className="flex flex-wrap gap-1.5 mb-5">
-                        <span className="text-[10px] font-medium bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 px-2 py-0.5 rounded-md">
+                        <span className="text-[10px] font-medium bg-emerald-500/10
+                         text-emerald-300 border border-emerald-500/20 px-2 py-0.5 rounded-md">
                             ✓ {vaccinationStatus || "Not Verified"}
                         </span>
                         {healthStatus && (
-                            <span className="text-[10px] font-medium bg-amber-500/10 text-amber-300 border border-amber-500/20 px-2 py-0.5 rounded-md truncate max-w-[150px]">
+                            <span className="text-[10px] font-medium bg-amber-500/10
+                             text-amber-300 border border-amber-500/20 px-2 py-0.5 rounded-md truncate max-w-37">
                                 {healthStatus}
                             </span>
                         )}

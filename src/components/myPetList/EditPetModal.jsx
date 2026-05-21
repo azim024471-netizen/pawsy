@@ -1,28 +1,17 @@
-
 "use client";
-
 import React from "react";
-import {
-  Button,
-  FieldError,
-  Form,
-  Input,
-  Label,
-  Modal,
-  TextArea,
-  TextField,
-} from "@heroui/react";
-
-import {
-  MdOutlineCategory,
-  MdOutlineVaccines,
-  MdOutlineWc,
-} from "react-icons/md";
-
+import { Button, FieldError, Form, Input, Label, Modal, TextArea, TextField} from "@heroui/react";
+import {MdOutlineCategory, MdOutlineVaccines, MdOutlineWc} from "react-icons/md";
 import { FaEdit, FaPaw } from "react-icons/fa";
 import { CgEditContrast } from "react-icons/cg";
 
+
 const EditPetModal = ({pet}) => {
+
+          const {_id,petName, description, species,breed,age, gender, image,
+            healthStatus,vaccinationStatus, location, adoptionFee } = pet;
+        
+            console.log(pet, 'from updatae modal page')
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -34,7 +23,7 @@ const EditPetModal = ({pet}) => {
     console.log(data);
   };
 
-  const selectStyle = "w-full bg-transparent text-black text-sm outline-none border-none cursor-pointer pr-2";
+  const selectStyle = "w-full bg-transparent text-black rounded-xl text-sm outline-none border-none cursor-pointer pr-2";
 
   const selectContainerStyle =
     "flex items-center gap-2 px-3 bg-[#eecbb3] border border-white/10 rounded-xl h-11 focus-within:border-[#FFEFD5]/40 transition-all w-full";
@@ -48,7 +37,7 @@ const EditPetModal = ({pet}) => {
             border-[#2e1e14] font-bold py-1.5 rounded-lg transition-all border flex items-center
            justify-center
                    gap-1 text-[11px] active:scale-[0.97]">
-        <FaEdit className="text-[#FFEFD5]/70 text-xs" />  Edit Pet
+        <FaEdit className="text-[#FFEFD5]/70 hover:text-[#3D2516] text-xs" />  Edit Pet
            </Button> 
 
       <Modal.Backdrop
@@ -85,6 +74,7 @@ const EditPetModal = ({pet}) => {
 
                   <TextField
                     isRequired
+                    defaultValue={petName}
                     name="petName"
                     validate={(value) => {
                       if (value.length < 3)
@@ -115,7 +105,7 @@ const EditPetModal = ({pet}) => {
                       <select
                         required
                         name="species"
-                        defaultValue=""
+                        defaultValue={species}
                         className={selectStyle}
                       >
                         <option value="" disabled hidden>
@@ -135,6 +125,7 @@ const EditPetModal = ({pet}) => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
 
                   <TextField
+                  defaultValue={breed}
                     isRequired
                     name="breed"
                     className="w-full"
@@ -150,6 +141,7 @@ const EditPetModal = ({pet}) => {
                     isRequired
                     name="age"
                     className="w-full"
+                    defaultValue={age}
                   >
                     <Label className="text-xs font-bold text-[#FFEFD5] tracking-wider pl-1 mb-1.5 block">
                       AGE
@@ -172,7 +164,7 @@ const EditPetModal = ({pet}) => {
                       <select
                         required
                         name="gender"
-                        defaultValue=""
+                        defaultValue={gender}
                         className={selectStyle}
                       >
                         <option value="" disabled hidden>
@@ -186,6 +178,7 @@ const EditPetModal = ({pet}) => {
                   </div>
 
                   <TextField
+                  defaultValue={image}
                     isRequired
                     name="image"
                     className="w-full"
@@ -202,6 +195,7 @@ const EditPetModal = ({pet}) => {
 
                   <TextField
                     isRequired
+                    defaultValue={healthStatus}
                     name="healthStatus"
                     className="w-full"
                     validate={(value) => {
@@ -234,7 +228,7 @@ const EditPetModal = ({pet}) => {
                       <select
                         required
                         name="vaccinationStatus"
-                        defaultValue=""
+                        defaultValue={vaccinationStatus}
                         className={selectStyle}
                       >
                         <option value="" disabled hidden>
@@ -260,6 +254,7 @@ const EditPetModal = ({pet}) => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
 
                   <TextField
+                  defaultValue={location}
                     isRequired
                     name="location"
                     className="w-full"
@@ -272,6 +267,7 @@ const EditPetModal = ({pet}) => {
                   </TextField>
 
                   <TextField
+                  defaultValue={adoptionFee}
                     isRequired
                     type="number"
                     name="adoptionFee"
@@ -294,6 +290,7 @@ const EditPetModal = ({pet}) => {
                   <div className="p-3 bg-[#eecbb3] border border-white/10 rounded-xl focus-within:border-white transition-all">
 
                     <TextArea
+                    defaultValue={description}
                       required
                       name="description"
                       placeholder="Write details about the pet's behavior, history, etc..."

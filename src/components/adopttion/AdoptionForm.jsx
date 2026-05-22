@@ -29,7 +29,7 @@ const AdoptionForm =  ({pet, user}) => {
         ...requestData, 
         applicantId : id,
         petId : _id,
-        status: "pending", 
+        status: "Pending", 
     requestedAt: new Date(),
     }
 

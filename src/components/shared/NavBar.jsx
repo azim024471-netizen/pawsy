@@ -148,12 +148,12 @@ const Navbar = () => {
                     </div>
 
                     <Link
-                      href="/dashboard"
+                      href="/dashboard/my-requests"
                       onClick={() => setDropdownOpen(false)}
                       className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-[#3D2516] hover:bg-[#FFEFD5]/40 transition-colors"
                     >
                       <FaTachometerAlt className="text-xs opacity-70" />
-                      Dashboard
+                     My Requests
                     </Link>
 
                     <Link

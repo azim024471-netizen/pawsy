@@ -49,20 +49,18 @@ const EditPetModal =  ({pet}) => {
                 router.refresh();
             } else {
                 toast.warning("Could No Update", {
-                    description: "You have to change al last one thing to update.",
+                    description: "You have to change at last one thing to update.",
                 });
             }
 
         } catch(error){
-            toast.danger("Action Failed", {
-                    description: "Something went wrong. Please check your internet connection or try again later.",
+            toast.danger("Update Failed", {
+                    description: "Something went wrong. Please try again later.",
                     indicator: true,
                         });
 
                         }
   };
-
-
 
 
 

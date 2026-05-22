@@ -1,3 +1,4 @@
+import AdoptionForm from '@/components/adopttion/AdoptionForm';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import Image from 'next/image';
@@ -14,6 +15,7 @@ const PetDetailsPage = async ({ params }) => {
         headers: await headers()
       });
         
+      const user = session?.user
       const userId = session?.user?.id
        
     //   console.log(userId, 'user id from validation page,,,,,,,,,,,,,')
@@ -30,7 +32,7 @@ const PetDetailsPage = async ({ params }) => {
      
     const canNotAdopt = ownerId === userId;
     
-    console.log(canNotAdopt, 'adoptttttttt')
+    // console.log(canNotAdopt, 'adoptttttttt')
     
 
     // console.log(pet)
@@ -146,15 +148,14 @@ const PetDetailsPage = async ({ params }) => {
     </div>
 
     {
-        canNotAdopt ? <><span className="text-[#9b907e]  font-bold">You Can't Adopt Your Own Pet</span></> : <><button 
-        className="flex items-center 
-        justify-center gap-2 bg-[#FFEFD5] hover:bg-[#FFEFD5]/90
-         text-[#3D2516] text-xs font-black uppercase tracking-wider px-4 py-2 rounded-xl transition-all shadow-md active:scale-[0.9]
-          w-full sm:w-auto shrink-0"
-    >
-        <FaPaw className="text-xs" />
-        Request to Adopt
-    </button></> 
+        canNotAdopt ? <><span className="text-[#9b907e]  font-bold">You Can't Adopt Your Own Pet</span></>
+
+         :
+
+         <>  
+
+    <AdoptionForm pet={pet} user={user}></AdoptionForm>
+    </> 
     }
 </div>   
 

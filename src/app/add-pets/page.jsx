@@ -1,13 +1,14 @@
 'use client'
 import { authClient } from '@/lib/auth-client';
-import { Button, Card, Form, Input, Label, TextField, TextArea, FieldError } from '@heroui/react';
+import { Button, Card, Form, Input, Label, TextField, TextArea, FieldError, Toast, toast } from '@heroui/react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { FaPaw } from 'react-icons/fa';
 import { MdOutlineCategory, MdOutlineWc, MdOutlineVaccines } from 'react-icons/md';
-import { toast } from 'react-toastify';
 
 const AddPetPage = () => {
+    const router = useRouter();
 
     const { data: session, isPending } = authClient.useSession()
     const user = session?.user;
@@ -35,11 +36,12 @@ const AddPetPage = () => {
             })
 
             const data = await res.json()
-            console.log(data, 'after post')
+            // console.log(data, 'after post')
 
             if (data.insertedId) {
-                console.log('Pet added successfully!')
              toast.success("Pet added successfully!");
+
+             router.push('/all-pets')
                
             }
 
@@ -196,7 +198,6 @@ const AddPetPage = () => {
                         </TextField>
                     </div>
 
-                    {/* Owner Email - Read Only */}
                     <TextField
                         isRequired
                         type="email"

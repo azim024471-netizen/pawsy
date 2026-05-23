@@ -1,6 +1,7 @@
 import { Button, Modal } from "@heroui/react";
 import { useState } from "react";
 import { FaClipboardList, FaCheck, FaTimes } from "react-icons/fa";
+import ApprovAndRejectButton from "./ApprovAndRejectButton";
 
 const GetRequests = ({ pet }) => {
     const { _id, petName } = pet;
@@ -94,7 +95,9 @@ const GetRequests = ({ pet }) => {
                                                 </p>
                                             </div>
 
-                                            <div className="flex gap-2">
+                                            {/* <div className="flex gap-2"> */}
+
+{/* 
                                                 <Button className="flex-1 bg-emerald-950 hover:bg-emerald-600 
                                                     text-emerald-400 hover:text-white font-bold rounded-xl 
                                                     border border-emerald-500/40 text-xs transition-all flex 
@@ -107,8 +110,10 @@ const GetRequests = ({ pet }) => {
                                                     border border-red-500/40 text-xs 
                                                     transition-all flex items-center justify-center gap-2">
                                                     <FaTimes /> REJECT
-                                                </Button>
-                                            </div>
+                                                </Button> */}
+                       <ApprovAndRejectButton request ={request} pet={pet}></ApprovAndRejectButton>
+                    
+                                            {/* </div> */}
 
                                         </div>
                                     ))}

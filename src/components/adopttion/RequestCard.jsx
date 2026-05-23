@@ -2,11 +2,14 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
+import DeleteAdoption from './DeleteAdoption';
 
 const RequestCard = ({ request }) => {
-    const router = useRouter();
-    const { _id, petName, petId, requestedAt, pickup_date, status } = request;
+    const {  petName, petId, requestedAt, pickup_date, status } = request;
+  
+    console.log(request, 'form req carddddddddddddddddddddd')
+
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-5 gap-3 md:gap-4 items-center px-6 py-5 md:py-4 transition-colors
@@ -43,12 +46,16 @@ const RequestCard = ({ request }) => {
                      View
                 </Link>
                 
-                <button 
-                    // onClick={handleCancelRequest}
-                    className="px-3 py-1.5 text-xs font-semibold bg-rose-500/10 hover:bg-rose-600 text-rose-400 hover:text-white border border-rose-500/20 rounded-lg transition-all shadow-sm active:scale-95"
+                {/* <button 
+                    
+                    className="px-3 py-1.5 text-xs font-semibold bg-rose-500/10 hover:bg-rose-600 text-rose-400
+                     hover:text-white border border-rose-500/20 rounded-lg transition-all shadow-sm active:scale-95"
                 >
                     Cancel
-                </button>
+                </button>  */}
+           
+
+            <DeleteAdoption request={request}></DeleteAdoption>
             </div>
 
         </div>

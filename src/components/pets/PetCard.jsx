@@ -28,7 +28,6 @@ const PetCard = ({ pet }) => {
     const {
         _id,
         petName,
-        species,
         breed, age, gender, image, healthStatus, vaccinationStatus, location, adoptionFee } = pet;
     return (
         <div className="bg-[#271709] backdrop-blur-md rounded-xl border-l-4 border-white overflow-hidden group hover:border-[#FFEFD5]/30 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">

@@ -30,12 +30,38 @@ const PetDetailsPage = async ({ params }) => {
      ownerEmail, ownerId
     } = pet ;
      
-    const canNotAdopt = ownerId === userId;
-    
-    // console.log(canNotAdopt, 'adoptttttttt')
-    
-
+    const canNotAdopt = ownerId === userId;    
+    // console.log(canNotAdopt, 'adoptttttttt') 
     // console.log(pet)
+
+const adoptionRes = await fetch(
+    `http://localhost:1234/adoption-requests/check/${id}/${userId}`,
+    { cache: 'no-store' }
+);
+const existingRequest = await adoptionRes.json();
+//    console.log(existingRequest, 'this is  request for  this pet tyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
+
+   const  status = existingRequest?.status;
+//    console.log(status, ' this is status sssssssssssssssssssss')
+
+
+const statusConfig = {
+  Pending: {
+    text: "Your request is pending",
+    className: "bg-amber-500/10 text-amber-400 border-amber-500/30"
+  },
+  Approved: {
+    text: "You have adopted it! 🎉",
+    className: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
+  },
+  Rejected: {
+    text: "Your request is declined",
+    className: "bg-red-500/10 text-red-400 border-red-500/30"
+  }
+}
+
+const currentSatus = statusConfig[status];
+
 
     return (
         <div className="min-h-screen bg-[#3D2516] text-white p-4 sm:p-6 md:p-8 lg:p-12 ">
@@ -147,16 +173,26 @@ const PetDetailsPage = async ({ params }) => {
         </span>
     </div>
 
-    {
-        canNotAdopt ? <><span className="text-[#9b907e]  font-bold">You Can't Adopt Your Own Pet</span></>
+    {canNotAdopt ? (
+  <span className="text-[#9b907e] font-bold">
+    You Can't Adopt Your Own Pet
+  </span>
+) : (
+  <>
+    {!existingRequest ? (
+      <AdoptionForm pet={pet} user={user} />
+    ) : (
 
-         :
 
-         <>  
+    <span className={`inline-flex items-center gap-2 text-xs font-black 
+    uppercase tracking-widest px-5 py-2.5 rounded-xl border ${currentSatus.className}`}>
+     <FaPaw></FaPaw>
+       {currentSatus.text}
+    </span>
 
-    <AdoptionForm pet={pet} user={user}></AdoptionForm>
-    </> 
-    }
+    )}
+  </>
+)}
 </div>   
 
  <div className="bg-[#2A190E]/20 p-6 rounded-2xl  mt-2">
@@ -176,3 +212,20 @@ const PetDetailsPage = async ({ params }) => {
 };
 
 export default PetDetailsPage;
+
+
+
+
+
+
+
+
+// {!existingRequest ? (
+//   <AdoptionForm pet={pet} user={user} />
+// ) : (
+//   <span className={`inline-flex items-center gap-2 text-xs font-black 
+//     uppercase tracking-widest px-5 py-2.5 rounded-xl border ${current.className}`}>
+//     <span className="w-1.5 h-1.5 rounded-full bg-current" />
+//     {current.text}
+//   </span>
+// )}

@@ -3,13 +3,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { FaEye,  FaTrash, FaClipboardList, FaMapMarkerAlt, FaPaw } from 'react-icons/fa';
+import { FaEye,   FaMapMarkerAlt, FaPaw } from 'react-icons/fa';
 import EditPetModal from './EditPetModal';
 import DeletePetModal from './DeletePetModal';
+import GetRequests from './GetRequests';
 
 const PetListCard = ({ pet }) => {
 
-    const {_id,petName, species,breed,age, gender, image,healthStatus,   vaccinationStatus,    location, adoptionFee } = pet;
+    const {_id,petName, species,breed,age, gender, image,healthStatus,vaccinationStatus,location, adoptionFee } = pet;
 
     return (
         <div className="bg-[#3a2d17] border-b-3 border-r-2
@@ -71,13 +72,15 @@ const PetListCard = ({ pet }) => {
 
                  <div className="grid grid-cols-2 gap-2">
 
-                    <Link href={`/pet-requests/${_id}`} className="w-full">
+                    {/* <Link href={`/pet-requests/${_id}`} className="w-full">
                         <button className="w-full bg-white/5 hover:bg-emerald-600 text-[#FFEFD5] hover:text-white font-bold py-1.5 rounded-lg transition-all border border-emerald-600/30 flex items-center justify-center gap-1 text-[11px] active:scale-[0.97]">
                             <FaClipboardList className="text-emerald-400 group-hover:text-white text-xs" />
                             Requests
                         </button>
                     </Link>
- 
+  */}
+
+  <GetRequests pet={pet}></GetRequests>
            
 
                     <Link href={`/all-pets/${_id}`} className="w-full">

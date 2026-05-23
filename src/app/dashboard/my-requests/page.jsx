@@ -32,17 +32,16 @@ const MyRequestsPage = async () => {
 
      
 //   console.log(user, 'jidddddddddddddddddddddddddddddddddddddd')
-    // const userId = "6a0cc87ada0ea565c2efd197"; 
-    
+   
     const res = await fetch(`http://localhost:1234/adoption-requests/${userId}`, {
         cache: 'no-store'
     });
     const myRequests = await res.json();
 
     const totalRequests = myRequests.length;
-    const pendingRequests = myRequests.filter(req => req.status === 'pending').length;
-    const approvedRequests = myRequests.filter(req => req.status === 'approved').length;
-    const rejectedRequests = myRequests.filter(req => req.status === 'rejected').length;
+    const pendingRequests = myRequests.filter(req => req.status === 'Pending').length;
+    const approvedRequests = myRequests.filter(req => req.status === 'Approved').length;
+    const rejectedRequests = myRequests.filter(req => req.status === 'Rejected').length;
 
     return (
         <div className="min-h-screen bg-[#110D05] text-[#F3EFE0] p-6 md:p-13">

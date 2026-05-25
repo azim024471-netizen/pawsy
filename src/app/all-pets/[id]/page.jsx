@@ -45,7 +45,18 @@ const existingRequest = await adoptionRes.json();
 //    console.log(status, ' this is status sssssssssssssssssssss')
 
 
-const statusConfig = {
+const  petRequestRes = await fetch(`http://localhost:1234/adoption-requests/pet/${id}`);
+const petRequests = await  petRequestRes.json();
+console.log(petRequests, 'allrequetsssssssssssssss')
+
+
+
+const approvedReq = petRequests?.find(req => req.status === "Approved");
+
+const adoptedBy = approvedReq?.applicantName;
+
+
+const statusSet = {
   Pending: {
     text: "Your request is pending",
     className: "bg-amber-500/10 text-amber-400 border-amber-500/30"
@@ -60,7 +71,8 @@ const statusConfig = {
   }
 }
 
-const currentSatus = statusConfig[status];
+const currentSatus = statusSet[status];
+
 
 
     return (
@@ -173,6 +185,15 @@ const currentSatus = statusConfig[status];
         </span>
     </div>
 
+
+      {
+        adoptedBy? <>
+        <span 
+        className=' text-emerald-400 inline-flex items-center  text-xs tracking-widest px-5 py-2.5 rounded-xl border'>
+        PET ADOPT BY{adoptedBy}</span>
+        </> : <>
+        
+        
     {canNotAdopt ? (
   <span className="text-[#9b907e] font-bold">
     You Can't Adopt Your Own Pet
@@ -193,6 +214,15 @@ const currentSatus = statusConfig[status];
     )}
   </>
 )}
+        
+        </>
+
+
+        
+      }
+
+
+ 
 </div>   
 
  <div className="bg-[#2A190E]/20 p-6 rounded-2xl  mt-2">

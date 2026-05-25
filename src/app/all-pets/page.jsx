@@ -4,10 +4,20 @@
 import PetCard from '@/components/pets/PetCard';
 import React from 'react';
 import { FaPaw } from 'react-icons/fa';
+import SearchAndFilter from "@/components/searchAndFilter/SearchAndFilter";
 
-const AllPets = async () => {
+const AllPets = async ({ searchParams }) => {
 
-    const res = await fetch('http://localhost:1234/allpets', { cache: 'no-store' });
+    const sParams = await searchParams;
+    const search = sParams?.search || "";
+    const species = sParams?.species || "";
+
+    const params = new URLSearchParams();
+    if (search) params.append('search', search);
+    if (species) params.append('species', species);
+
+    
+    const res = await fetch(`http://localhost:1234/allpets?${params.toString()}`, { cache: 'no-store' });
     const allpets = await res.json();
     
     const totalPets = allpets.length;
@@ -16,25 +26,28 @@ const AllPets = async () => {
         <div className="min-h-screen bg-[#3D2516] text-white p-4 sm:p-8 md:p-12 ">
             <div className="max-w-7xl mx-auto">
                 
-                <div className="text-center md:text-left mb-10 border-b border-white/10 pb-6 flex flex-col md:flex-row
-                 md:items-end justify-between gap-4">
-                    <div>
-                        <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-                            <span className="bg-[#FFEFD5] text-[#3D2516] p-1.5 rounded-lg text-sm">
+                <div className="text-center md:text-left mb-10 border-b border-white/10 pb-6 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+                    <div className='space-y-4 flex flex-col items-center md:items-start'>
+                        <div className="flex items-center justify-center md:justify-start gap-2">
+                            <span className="bg-[#FFEFD5] text-[#3D2516] p-1.5 rounded-lg text-sm shadow-md">
                                 <FaPaw />
                             </span>
-                            <h4 className="text-xs uppercase tracking-widest font-bold text-[#FFEFD5]/70">Hattify Adoption</h4>
+                            <h4 className="text-xs tracking-widest font-bold text-[#FFEFD5]/70 uppercase">PAWSY ADOPTION</h4>
                         </div>
+                        
                         <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#FFEFD5]">
                             Meet Your New Best Friend
                         </h1>
+
+                        <div className="bg-white/5 border border-white/10 px-4 py-2 rounded-2xl backdrop-blur-sm inline-block self-center md:self-auto">
+                            <p className="text-sm font-medium text-white/80">
+                                <span className="text-[#FFEFD5] font-extrabold text-lg mr-1">{totalPets}</span> 
+                                lovely pets available for adoption
+                            </p>
+                        </div>
                     </div>
-                    <div className="bg-white/5 border border-white/10 px-4 py-2 rounded-2xl backdrop-blur-sm inline-block self-center md:self-auto">
-                        <p className="text-sm font-medium text-white/80">
-                            <span className="text-[#FFEFD5] font-extrabold text-lg mr-1">{totalPets}</span> 
-                            lovely pets available for adoption
-                        </p>
-                    </div>
+
+                    <SearchAndFilter />
                 </div>
 
                 {totalPets === 0 ? (
@@ -55,3 +68,4 @@ const AllPets = async () => {
 };
 
 export default AllPets;
+

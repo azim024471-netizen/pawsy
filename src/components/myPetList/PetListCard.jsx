@@ -72,13 +72,8 @@ const PetListCard = ({ pet }) => {
 
                  <div className="grid grid-cols-2 gap-2">
 
-                    {/* <Link href={`/pet-requests/${_id}`} className="w-full">
-                        <button className="w-full bg-white/5 hover:bg-emerald-600 text-[#FFEFD5] hover:text-white font-bold py-1.5 rounded-lg transition-all border border-emerald-600/30 flex items-center justify-center gap-1 text-[11px] active:scale-[0.97]">
-                            <FaClipboardList className="text-emerald-400 group-hover:text-white text-xs" />
-                            Requests
-                        </button>
-                    </Link>
-  */}
+                   
+
 
   <GetRequests pet={pet}></GetRequests>
            

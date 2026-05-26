@@ -76,7 +76,7 @@ const PetCard = ({ pet }) => {
 
                     <div className="grid grid-cols-2 gap-3 mb-5">
 
-                        <div className="flex items-center gap-2 bg-[#2A190E]/40 p-2 rounded-xl border-r-4 border-l-2 border-[#FFEFD5]/70">
+                        <div className="flex items-center gap-2 bg-[#1f170b] p-2 rounded-xl border-r-4 border-l-2 border-[#FFEFD5]/70">
                             <MdOutlineCalendarMonth className='text-[#FFEFD5]/60 text-lg shrink-0' />
                             <div className="truncate">
                                 <p className="text-[10px] uppercase tracking-wider text-white/40 font-bold">Age</p>
@@ -84,9 +84,9 @@ const PetCard = ({ pet }) => {
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-2 bg-[#2A190E] p-2 rounded-xl border-r-4 border-l-2 border-[#FFEFD5]/70">
+                        <div className="flex items-center gap-2 bg-[#1f170b] p-2 rounded-xl border-r-4 border-l-2 border-[#FFEFD5]/70">
                             <IoLocationOutline className='text-[#FFEFD5]/60 text-lg shrink-0' />
-                            <div className="truncate">
+                            <div className="truncate ">
                                 <p className="text-[10px] uppercase tracking-wider text-white/40 font-bold">Location</p>
                                 <p className="text-xs font-bold uppercase text-white/90 truncate">{location}</p>
                             </div>
@@ -109,9 +109,10 @@ const PetCard = ({ pet }) => {
 
                 <div>
                     <Link href={`/all-pets/${_id}`}>
-                        <button className="w-full text-[#FFEFD5] hover:bg-[#FFEFD5] hover:text-[#3D2516] bg-[#3D2516]
+                        <button className="w-full text-[#FFEFD5] bg-[#64440b] hover:bg-[#FFEFD5]
+                         hover:text-[#3D2516] 
                          font-extrabold py-2.5 rounded-xl transition-all duration-300 flex items-center
-                          justify-center gap-2 text-sm shadow-sm shadow-[#FFEFD5]">
+                          justify-center gap-2 text-sm shadow-sm shadow-[#271c0b]">
                             View Details <FaPaw className="text-xs" />
                         </button>
                     </Link>

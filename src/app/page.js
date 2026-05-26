@@ -1,6 +1,7 @@
 import Banner from "@/components/homepage/Banner";
 import Featured from "@/components/homepage/Featured";
-import { Button } from "@heroui/react";
+import PetCareTips from "@/components/homepage/PetCareTips";
+import WhyAdoptPets from "@/components/homepage/WhyAdoptPets";
 
 
 
@@ -8,10 +9,9 @@ export default function Home() {
   return (
     <div>
       <Banner></Banner>
-       
-     Hom page
-     <Button>Primary</Button>
      <Featured></Featured>
+     <WhyAdoptPets></WhyAdoptPets>
+     <PetCareTips></PetCareTips>
     </div>
   );
 }

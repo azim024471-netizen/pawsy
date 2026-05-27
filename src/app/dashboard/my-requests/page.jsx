@@ -23,7 +23,12 @@ import React from 'react';
 import { FaPaw } from 'react-icons/fa';
 
 const MyRequestsPage = async () => {
-
+    
+        const tokenObj = await auth.api.getToken({
+            headers : await headers()
+        })
+        const token = tokenObj?.token;
+    
      const session = await auth.api.getSession({
     headers: await headers()
   });
@@ -33,10 +38,14 @@ const MyRequestsPage = async () => {
      
 //   console.log(user, 'jidddddddddddddddddddddddddddddddddddddd')
    
-    const res = await fetch(`http://localhost:1234/adoption-requests/${userId}`, {
-        cache: 'no-store'
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adoption-requests/${userId}`, {
+        cache: 'no-store',
+      headers :{
+                   'authorization' :`Bearer ${token}`
+              }
     });
     const myRequests = await res.json();
+    console.log(myRequests, 'new ssssssssssssssssssssssssssssssss')
 
     const totalRequests = myRequests.length;
     const pendingRequests = myRequests.filter(req => req.status === 'Pending').length;

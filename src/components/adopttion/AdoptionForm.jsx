@@ -1,25 +1,26 @@
 
+// /complete jwtttttttttttttttttttt ///////////////
 "use client";
 import React from "react";
 import { Button, FieldError, Form, Input, Label, Modal, TextArea, TextField, toast} from "@heroui/react";
 import {  FaPaw } from "react-icons/fa";
-// import { CgEditContrast } from "react-icons/cg";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 
 const AdoptionForm =  ({pet, user}) => {
     // console.log(user) 
     const {name, id, email} = user;
     
-
   const router = useRouter();
 
           const {_id,petName,   } = pet;
-        
             // console.log(pet, 'from updatae modal page')
 
   const onSubmit = async(e) => {
+
     e.preventDefault();
+
 
     const formData = new FormData(e.currentTarget);
     const requestData = Object.fromEntries(formData);
@@ -36,15 +37,21 @@ const AdoptionForm =  ({pet, user}) => {
     // console.log(adoptionRequest)
 
   try {
+    const {data:tokenData} = await authClient.token();
+       const token = tokenData?.token;
+      //  console.log(token, 'form boookgggggggggggggggggggg')
+
            
-    const res = await fetch('http://localhost:1234/adoption-requests', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adoption-requests`, {
       method : "POST",
-       headers: { 'Content-Type': 'application/json' },
+       headers: { 'Content-Type': 'application/json',
+                   'authorization' : `Bearer ${token}`
+                },
                 body: JSON.stringify(adoptionRequest)
     }) ;
     
  const data = await res.json();
- console.log(data, 'data after upateeeeeeeeeeeeeeeeee')
+//  console.log(data, 'data after upateeeeeeeeeeeeeeeeee')
 
             if (data.insertedId) {
                 toast.success("Pet Updated", {

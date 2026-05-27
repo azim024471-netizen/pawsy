@@ -11,7 +11,6 @@ const Banner = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
-          {/* বাম পাশের টেক্সট এরিয়া (৫ কলাম) */}
           <div className="lg:col-span-5 space-y-8 text-center lg:text-left z-10">
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-serif font-black tracking-tight leading-[1.1]">

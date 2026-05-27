@@ -5,6 +5,7 @@ import {MdOutlineCategory, MdOutlineVaccines, MdOutlineWc} from "react-icons/md"
 import { FaEdit, FaPaw } from "react-icons/fa";
 import { CgEditContrast } from "react-icons/cg";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 
 const EditPetModal =  ({pet}) => { 
@@ -16,6 +17,7 @@ const EditPetModal =  ({pet}) => {
             // console.log(pet, 'from updatae modal page')
 
   const onSubmit = async(e) => {
+    
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
@@ -25,10 +27,15 @@ const EditPetModal =  ({pet}) => {
 
 
   try {
+     const {data:tokenData} = await authClient.token();
+           const token = tokenData?.token;
            
-    const res = await fetch(`http://localhost:1234/allpets/${_id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allpets/${_id}`, {
       method : "PATCH",
-       headers: { 'Content-Type': 'application/json' },
+       headers: { 'Content-Type': 'application/json',
+                                      'authorization' : `Bearer ${token}`
+
+                   },
                 body: JSON.stringify(updateData)
     }) ;
     

@@ -1,33 +1,52 @@
+//    jwt cmplttttttt/ //////////////////////////
+'use client'
+import { authClient } from '@/lib/auth-client';
 import { Button } from '@heroui/react';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { FaCheck, FaPaw, FaTimes } from 'react-icons/fa';
 
 const ApprovAndRejectButton = ({request, pet}) => {
+    const router = useRouter();
   
     const {petId, _id:requestId, status} = request;
 
-    console.log(petId, requestId)
+    // console.log(petId, requestId)
 
-    console.log(request, pet , "button ")
+    // console.log(request, pet , "button ")
 
     const  handleApprove = async (requestId, petId)=>{
-        await fetch(`http://localhost:1234/adoption-requests/${requestId}`, {
+
+        const {data} = await authClient.token();
+               const token = data?.token;
+
+        await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adoption-requests/${requestId}`, {
         method: 'PATCH',
-        headers: { 'content-type': 'application/json' },
+        headers: { 'content-type': 'application/json',
+            'authorization' :`Bearer ${token}`
+         },
         body: JSON.stringify({ 
             setStatus: 'Approved',
             petId,    
         })
-    }); }
+    }); 
+         router.refresh()
+      }
 
      
     const handleReject= async(requestId)=>{
 
-         await fetch(`http://localhost:1234/adoption-requests/${requestId}`, {
+           const {data} = await authClient.token();
+               const token = data?.token;
+         await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adoption-requests/${requestId}`, {
         method: 'PATCH',
-        headers: { 'content-type': 'application/json' },
+        headers: { 'content-type': 'application/json',
+                        'authorization' :`Bearer ${token}`
+         },
         body: JSON.stringify({ setStatus: 'Rejected' })
-    }); }
+    }); 
+   router.refresh()   
+}
 
     return (
         <div className='flex gap-2'>

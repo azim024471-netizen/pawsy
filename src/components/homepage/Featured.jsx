@@ -4,13 +4,12 @@ import { FaPaw } from 'react-icons/fa';
 import Link from 'next/link';
 
 const Featured = async () => {
-    const res = await fetch(`http://localhost:1234/featured`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/featured`, {
         cache: 'no-store'
     });
     const featuredPets = await res.json();
 
     return (
-        // <div className="relative py-20 px-4 bg-[#FFEFD5] sm:px-8 overflow-hidden">
         <div className="relative py-20 px-4 bg-linear-to-br from-[#0f0f0c] via-[#291f1a] 
          to-[#3b372c] sm:px-8 overflow-hidden"> 
         
@@ -23,7 +22,6 @@ const Featured = async () => {
                     <div className="flex items-center  mb-6">
                         <div className="bg-[#e6e0d2] p-7 text-[#3D2516] text-4xl rounded-full">
                            
-                     {/* <Image alt='logo' height={100} width={100} src={'/paw.png'}></Image> */}
                    <FaPaw></FaPaw>
                         </div>
                     </div>

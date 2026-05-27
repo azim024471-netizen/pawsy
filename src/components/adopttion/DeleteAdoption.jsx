@@ -1,4 +1,6 @@
+// 'jwt done///////////////////////////////////'
 'use client'
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button,  toast } from "@heroui/react";
 import { useRouter } from "next/navigation";
 
@@ -11,10 +13,14 @@ const DeleteAdoption = ({request}) => {
     const handleDelete = async ()=>{
 
           try {
-            const res = await fetch(`http://localhost:1234/adoption-requests/${_id}`, {
+             const {data:tokenData} = await authClient.token();
+       const token = tokenData?.token;
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adoption-requests/${_id}`, {
                 method: "DELETE",
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    'authorization' : `Bearer ${token}`
+
                 }
             });
 

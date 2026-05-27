@@ -1,4 +1,4 @@
-
+// done jwt ////////////////////////
 
 import PetListCard from '@/components/myPetList/PetListCard';
 import { auth } from '@/lib/auth';
@@ -8,27 +8,40 @@ import React from 'react';
 import { FaPaw, FaCheckCircle, FaHeart } from 'react-icons/fa';
 
 const MyListingPage = async () => {
+    
 
      const session = await auth.api.getSession({
     headers: await headers()
   });
     
+
+  
+      const {token} = await auth.api.getToken({
+          headers : await headers()
+      })
+        
+    //   const token = tokenObj?.token;
+
+//   const token = session?.token;
   const userId = session?.user?.id
    
-  console.log(userId)
-
+//   console.log(userId)
+ 
 
     const res = await fetch(
-        `http://localhost:1234/myPets/${userId}`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/myPets/${userId}`,
         {
-            cache: 'no-store'
+            cache: 'no-store',
+             headers :{
+                         'authorization' :`Bearer ${token}`
+                    }
         }
+        
     );
 
     const petLists = await res.json();
 
-    const totalListings = petLists.length;
-
+const totalListings = Array.isArray(petLists) ? petLists.length : 0;
    
 
 

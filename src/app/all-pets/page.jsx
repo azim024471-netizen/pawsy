@@ -17,7 +17,7 @@ const AllPets = async ({ searchParams }) => {
     if (species) params.append('species', species);
 
     
-    const res = await fetch(`http://localhost:1234/allpets?${params.toString()}`, { cache: 'no-store' });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allpets?${params.toString()}`, { cache: 'no-store' });
     const allpets = await res.json();
     
     const totalPets = allpets.length;

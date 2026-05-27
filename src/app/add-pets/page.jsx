@@ -25,13 +25,17 @@ const AddPetPage = () => {
             ownerEmail: email,
         }
 
-        console.log(petData, 'sending to server')
+        // console.log(petData, 'sending to server')
 
         try {
-            const res = await fetch('http://localhost:1234/allpets', {
+               const {data:tokenObj} = await authClient.token();
+               const token = tokenObj?.token;
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allpets`, {
                 method: 'POST',
                 
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json' ,
+                    "authorization" : `Bearer ${token}`
+                 },
                 body: JSON.stringify(petData)
             })
 

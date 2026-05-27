@@ -10,6 +10,13 @@ const RequestCard = ({ request }) => {
   
     console.log(request, 'form req carddddddddddddddddddddd')
 
+const statusStyles = {
+    Pending: "bg-amber-500/10 text-amber-500 border-amber-500/20",
+    Approved: "bg-emerald-500/10 text-emerald-500 border-emerald-500/20",
+    Rejected: "bg-rose-500/10 text-rose-500 border-rose-500/20",
+};
+ 
+const activestatus = statusStyles[status];
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-5 gap-3 md:gap-4 items-center px-6 py-5 md:py-4 transition-colors
@@ -30,12 +37,17 @@ const RequestCard = ({ request }) => {
                 <span className="text-[#D4C3A3] text-sm">{pickup_date}</span>
             </div>
 
-            <div className="flex items-center justify-between md:justify-center">
-                <span className="md:hidden text-xs font-bold text-[#D4C3A3] uppercase">Status:</span>
-                <span className={`text-xs px-3 py-1 rounded-full font-medium border capitalize `}>
-                    {status}
-                </span>
-            </div>
+            
+            
+<div className="flex items-center justify-between md:justify-center">
+    <span className="md:hidden text-xs font-bold text-[#D4C3A3] uppercase">Status:</span>
+    
+    <span className={`text-xs px-3 py-1 rounded-full font-medium border capitalize 
+        ${activestatus|| "bg-gray-500/10 text-gray-400 border-gray-500/20"}`}
+    >
+        {status}
+    </span>
+</div>
 
             <div className="flex items-center justify-center gap-2 pt-2 md:pt-0">
                 <Link 
@@ -46,13 +58,7 @@ const RequestCard = ({ request }) => {
                      View
                 </Link>
                 
-                {/* <button 
-                    
-                    className="px-3 py-1.5 text-xs font-semibold bg-rose-500/10 hover:bg-rose-600 text-rose-400
-                     hover:text-white border border-rose-500/20 rounded-lg transition-all shadow-sm active:scale-95"
-                >
-                    Cancel
-                </button>  */}
+                
            
 
             <DeleteAdoption request={request}></DeleteAdoption>

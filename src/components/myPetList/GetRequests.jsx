@@ -1,15 +1,26 @@
 import { Button, Modal } from "@heroui/react";
 import { useState } from "react";
-import { FaClipboardList, FaCheck, FaTimes } from "react-icons/fa";
+import { FaClipboardList } from "react-icons/fa";
 import ApprovAndRejectButton from "./ApprovAndRejectButton";
+import { authClient } from "@/lib/auth-client";
 
 const GetRequests = ({ pet }) => {
+    
+    
     const { _id, petName } = pet;
 
     const [requests, setRequests] = useState([]);
+    
     const onClickFetch = async () => {
+         const {data:tokenData} = await authClient.token();
+               const token = tokenData?.token;
+
         const res = await fetch(
-            `http://localhost:1234/adoption-requests/pet/${_id}`
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/adoption-requests/pet/${_id}`, {
+                headers : {
+                     'authorization' : `Bearer ${token}`
+                }
+            }
         );
         const data = await res.json();
         setRequests(data);
@@ -95,22 +106,7 @@ const GetRequests = ({ pet }) => {
                                                 </p>
                                             </div>
 
-                                            {/* <div className="flex gap-2"> */}
-
-{/* 
-                                                <Button className="flex-1 bg-emerald-950 hover:bg-emerald-600 
-                                                    text-emerald-400 hover:text-white font-bold rounded-xl 
-                                                    border border-emerald-500/40 text-xs transition-all flex 
-                                                    items-center justify-center gap-2">
-                                                    <FaCheck /> APPROVE
-                                                </Button>
-
-                                                <Button className="flex-1 bg-red-950 hover:bg-red-500 
-                                                    text-red-400 hover:text-white font-bold rounded-xl 
-                                                    border border-red-500/40 text-xs 
-                                                    transition-all flex items-center justify-center gap-2">
-                                                    <FaTimes /> REJECT
-                                                </Button> */}
+                                           
                        <ApprovAndRejectButton request ={request} pet={pet}></ApprovAndRejectButton>
                     
                                             {/* </div> */}

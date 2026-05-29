@@ -81,10 +81,8 @@ const AddPetPage = () => {
                     </p>
                 </div>
 
-                {/* form */}
                 <Form onSubmit={onSubmit} className="flex flex-col gap-5 w-full">
 
-                    {/* Pet Name & Species */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
                         <TextField
                             isRequired
@@ -115,7 +113,6 @@ const AddPetPage = () => {
                         </div>
                     </div>
 
-                    {/* Breed & Age */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
                         <TextField isRequired name="breed" className="w-full">
                             <Label className='text-xs font-bold text-[#FFEFD5] tracking-wider pl-1 mb-1.5 block'>BREED</Label>
@@ -128,7 +125,6 @@ const AddPetPage = () => {
                         </TextField>
                     </div>
 
-                    {/* Gender & Image URL */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
                         <div className="w-full">
                             <Label className='text-xs font-bold text-[#FFEFD5] tracking-wider pl-1 mb-1.5 block'>GENDER</Label>
@@ -148,7 +144,6 @@ const AddPetPage = () => {
                         </TextField>
                     </div>
 
-                    {/* Health Status & Vaccination Status */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
                         <TextField
                             isRequired
@@ -179,7 +174,6 @@ const AddPetPage = () => {
                         </div>
                     </div>
 
-                    {/* Location & Adoption Fee */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
                         <TextField
                             isRequired
@@ -216,7 +210,6 @@ const AddPetPage = () => {
                         <Input placeholder="user email" />
                     </TextField>
 
-                    {/* Description */}
                     <div className="w-full">
                         <Label className='text-xs font-bold text-[#FFEFD5] tracking-wider pl-1 mb-1.5 block'>DESCRIPTION</Label>
                         <div className="p-3 bg-[#eecbb3] border border-white/10 rounded-xl focus-within:border-white transition-all">

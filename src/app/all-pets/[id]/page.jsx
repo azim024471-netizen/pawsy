@@ -40,8 +40,11 @@ const PetDetailsPage = async ({ params }) => {
     const {
         petName, species, breed, age, gender, image, healthStatus, vaccinationStatus, location, adoptionFee, description,
         ownerEmail, ownerId
-    } = pet;
-
+    } = pet;   
+      
+    console.log('TOKEN:', token)
+console.log('SERVER URL:', process.env.NEXT_PUBLIC_SERVER_URL)
+      
     const canNotAdopt = ownerId === userId;
     // console.log(canNotAdopt, 'adoptttttttt') 
     // console.log(pet)
@@ -100,7 +103,7 @@ const PetDetailsPage = async ({ params }) => {
 
     const currentSatus = statusSet[status];
 
-
+   
 
     return (
         <div className="min-h-screen bg-[#3D2516] text-white p-4 sm:p-6 md:p-8 lg:p-12 ">

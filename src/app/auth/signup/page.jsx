@@ -1,5 +1,5 @@
 'use client'
-import { Button, Card, Form, Input, Label, TextField, FieldError, Description, toast} from '@heroui/react';
+import { Button, Card, Form, Input, Label, TextField, FieldError, Description, toast } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FcGoogle } from 'react-icons/fc';
@@ -9,14 +9,14 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const SignUpPage = () => {
-           const noop = (close) => close();
-            const router = useRouter();
+    const noop = (close) => close();
+    const router = useRouter();
 
-            const signIn = async () => {
-  await authClient.signIn.social({
-    provider: "google",
-  });
-};
+    const signIn = async () => {
+        await authClient.signIn.social({
+            provider: "google",
+        });
+    };
 
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -25,7 +25,7 @@ const SignUpPage = () => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const userData = Object.fromEntries(formData.entries());
-        
+
         const { name, email, password: pass, confirmPassword: confPass, image } = userData;
 
         if (!pass || !confPass || pass.trim() !== confPass.trim()) {
@@ -40,34 +40,35 @@ const SignUpPage = () => {
             image: image,
         });
 
-       if (error) {
-    toast.danger("Error: " + (error.message || "Something went wrong!"));
-} else {
-    toast.success("Registration successful! Welcome to Pawsy.", {
-        actionProps: {
-            children: "Close",
-            className: "bg-success text-success-foreground",
-            onPress: noop,
-        },
-        description: "Your account has been created successfully.",
-    });
+        if (error) {
+            toast.danger("Error: " + (error.message || "Something went wrong!"));
+        } else {
+            toast.success("Registration successful! Welcome to Pawsy.", {
+                actionProps: {
+                    children: "Close",
+                    className: "bg-success text-success-foreground",
+                    onPress: noop,
+                },
+                description: "Your account has been created successfully.",
+            });
 
-router.push("/");}
+            router.push("/");
+        }
 
         console.log(data, 'data from  mongo signup success')
     };
-    
+
     return (
         <div className='min-h-screen flex items-center justify-center bg-[#e9d5b3] p-4 font-sans'>
             <Card className="w-full max-w-md p-8 bg-[#3a2d17] backdrop-blur-lg rounded-3xl border border-white/10 shadow-2xl">
-                
+
                 <div className='flex flex-col items-center gap-2 mb-4'>
                     <div className="relative w-20 h-20 bg-[#FFEFD5] p-2 rounded-full shadow-inner flex items-center justify-center">
-                        <Image 
-                            src="/paw.png" 
-                            alt="Pawsy Logo" 
-                            width={64} 
-                            height={64} 
+                        <Image
+                            src="/paw.png"
+                            alt="Pawsy Logo"
+                            width={64}
+                            height={64}
                             className="object-contain"
                             priority
                         />
@@ -79,7 +80,7 @@ router.push("/");}
                 </div>
 
                 <Form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
-   
+
                     <TextField
                         isRequired
                         name="name"
@@ -95,7 +96,7 @@ router.push("/");}
                         <FieldError className="text-red-400 text-xs mt-1" />
                     </TextField>
 
-                    
+
                     <TextField
                         isRequired
                         name="email"
@@ -112,7 +113,7 @@ router.push("/");}
                         <FieldError className="text-red-400 text-xs mt-1" />
                     </TextField>
 
-                    
+
                     <TextField
                         isRequired
                         name="password"
@@ -132,7 +133,7 @@ router.push("/");}
                         <FieldError className="text-red-400 text-xs mt-1" />
                     </TextField>
 
-                  
+
                     <TextField
                         isRequired
                         name="confirmPassword"
@@ -150,7 +151,7 @@ router.push("/");}
                         <Input type="password" placeholder="Re-type your password" />
                         <FieldError className="text-red-400 text-xs mt-1" />
                     </TextField>
- 
+
                     <TextField
                         isRequired
                         name="image"
@@ -172,9 +173,9 @@ router.push("/");}
                     <p className="text-xs font-bold text-[#FFEFD5]/40 uppercase">or</p>
                     <div className="flex-1 h-px bg-white/10" />
                 </div>
-                
+
                 <div className='flex items-center gap-4'>
-                    <Button  onClick={signIn}
+                    <Button onClick={signIn}
                         className="w-full h-11 bg-white/5 text-[#FFEFD5] border border-white/10 hover:bg-white/10 font-bold px-5 py-2.5 rounded-xl transition-all duration-300 text-sm shadow-sm flex items-center justify-center gap-2"
                     >
                         <FcGoogle className="text-lg" /> Google

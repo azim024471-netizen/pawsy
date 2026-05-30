@@ -25,28 +25,27 @@ const AddPetPage = () => {
             ownerEmail: email,
         }
 
-        // console.log(petData, 'sending to server')
 
         try {
-               const {data:tokenObj} = await authClient.token();
-               const token = tokenObj?.token;
+            const { data: tokenObj } = await authClient.token();
+            const token = tokenObj?.token;
             const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allpets`, {
                 method: 'POST',
-                
-                headers: { 'Content-Type': 'application/json' ,
-                    "authorization" : `Bearer ${token}`
-                 },
+
+                headers: {
+                    'Content-Type': 'application/json',
+                    "authorization": `Bearer ${token}`
+                },
                 body: JSON.stringify(petData)
             })
 
             const data = await res.json()
-            // console.log(data, 'after post')
 
             if (data.insertedId) {
-             toast.success("Pet added successfully!");
+                toast.success("Pet added successfully!");
 
-             router.push('/all-pets')
-               
+                router.push('/all-pets')
+
             }
 
         } catch (error) {
@@ -61,7 +60,6 @@ const AddPetPage = () => {
         <div className='min-h-screen flex items-center justify-center bg-[#64573f] p-4 sm:p-6 font-sans'>
             <Card className="w-full max-w-2xl p-6 sm:p-8 bg-[#3a2d17] backdrop-blur-lg rounded-3xl border border-white/10 shadow-2xl">
 
-                {/* header */}
                 <div className='flex flex-col items-center gap-2 mb-8 text-center'>
                     <div className="w-20 h-20 bg-[#FFEFD5] rounded-full flex items-center justify-center shadow-md">
                         <Image

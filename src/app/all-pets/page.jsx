@@ -1,6 +1,4 @@
 
-
-
 import PetCard from '@/components/pets/PetCard';
 import React from 'react';
 import { FaPaw } from 'react-icons/fa';

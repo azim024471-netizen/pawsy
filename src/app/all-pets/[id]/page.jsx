@@ -18,7 +18,6 @@ const PetDetailsPage = async ({ params }) => {
     })
 
     const token = tokenObj?.token;
-    // console.log(token, 'token session')
 
     const session = await auth.api.getSession({
         headers: await headers()
@@ -27,7 +26,6 @@ const PetDetailsPage = async ({ params }) => {
     const user = session?.user
     const userId = session?.user?.id
 
-    //   console.log(userId, 'user id from validation page,,,,,,,,,,,,,')
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allpets/${id}`, {
         cache: 'no-store',
@@ -40,14 +38,12 @@ const PetDetailsPage = async ({ params }) => {
     const {
         petName, species, breed, age, gender, image, healthStatus, vaccinationStatus, location, adoptionFee, description,
         ownerEmail, ownerId
-    } = pet;   
-      
+    } = pet;
+
     console.log('TOKEN:', token)
-console.log('SERVER URL:', process.env.NEXT_PUBLIC_SERVER_URL)
-      
+    console.log('SERVER URL:', process.env.NEXT_PUBLIC_SERVER_URL)
+
     const canNotAdopt = ownerId === userId;
-    // console.log(canNotAdopt, 'adoptttttttt') 
-    // console.log(pet)
 
     const adoptionRes = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/adoption-requests/check/${id}/${userId}`,
@@ -59,10 +55,8 @@ console.log('SERVER URL:', process.env.NEXT_PUBLIC_SERVER_URL)
         }
     );
     const existingRequest = await adoptionRes.json();
-    //    console.log(existingRequest, 'this is  request for  this pet tyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
 
     const status = existingRequest?.status;
-    //    console.log(status, ' this is status sssssssssssssssssssss')
 
 
     const petRequestRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adoption-requests/pet/${id}`,
@@ -74,12 +68,10 @@ console.log('SERVER URL:', process.env.NEXT_PUBLIC_SERVER_URL)
         }
     );
     const petRequests = await petRequestRes.json();
-    // console.log(petRequests, 'allrequetsssssssssssssss')
 
 
 
     const approvedReq = petRequests?.find(req => req.status === "Approved");
-    //  console.log(approvedReq, 'from details approved  user.....................')
 
     const { applicantName: adoptedBy, applicantId } = approvedReq || {};
 
@@ -103,7 +95,7 @@ console.log('SERVER URL:', process.env.NEXT_PUBLIC_SERVER_URL)
 
     const currentSatus = statusSet[status];
 
-   
+
 
     return (
         <div className="min-h-screen bg-[#3D2516] text-white p-4 sm:p-6 md:p-8 lg:p-12 ">
@@ -246,9 +238,9 @@ console.log('SERVER URL:', process.env.NEXT_PUBLIC_SERVER_URL)
                                                 <AdoptionForm pet={pet} user={user} />
                                             ) : (
 
-                                                
-                    <span 
-            className={`inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest px-5 py-2.5 rounded-xl border ${currentSatus.className}`}>
+
+                                                <span
+                                                    className={`inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest px-5 py-2.5 rounded-xl border ${currentSatus.className}`}>
                                                     <FaPaw></FaPaw>
                                                     {currentSatus.text}
                                                 </span>
@@ -257,13 +249,7 @@ console.log('SERVER URL:', process.env.NEXT_PUBLIC_SERVER_URL)
                                         </>
                                     )}
 
-                                </>
-
-
-
-                            }
-
-
+                                </>}
 
                         </div>
 

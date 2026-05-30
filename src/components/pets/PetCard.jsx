@@ -1,20 +1,5 @@
 
 
-// "_id": "6a0cc395a4608ddaba434c1d",
-// "petName": "micky",
-// "species": "cat",
-// "breed": "Goldren",
-// "age": "2 yeats",
-// "gender": "female",
-// "image": "https://static.vecteezy.com/system/resources/thumbnails/021/185/682/small/man-in-motocross-helmet-racer-rider-cyclist-concept-suitable-for-avatar-profiles-t-shirt-design-print-sticker-poster-vector.jpg",
-// "healthStatus": "good",
-// "vaccinationStatus": "Partially Vaccinated",
-// "location": "dhaka",
-// "adoptionFee": "442",
-// "ownerEmail": "david12@gmail.com",
-// "description": "this is my fav pet",
-// "ownerId": "6a0c047e3cfd01c480a84997"
-
 
 'use client'
 import Image from 'next/image';
@@ -37,15 +22,10 @@ const PetCard = ({ pet }) => {
                     alt={petName}
                                       
                     src={image}
-
-
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
-
-
-
 
 
                 <span className="absolute bottom-3 right-3 bg-[#2A190E]/80 backdrop-blur-sm text-[#FFEFD5] text-xs font-bold px-3 py-1 rounded-xl border border-white/10 flex items-center gap-0.5">
@@ -59,7 +39,7 @@ const PetCard = ({ pet }) => {
                 <div>
                     <div className="flex items-center justify-between gap-2 mb-2">
                         <h3 className="text-xl font-extrabold text-[#FFEFD5] tracking-tight truncate">
-                            {petName}
+                            {petName?.toUpperCase()}
                         </h3>
                         <span className={`px-2.5 py-0.5 text-[11px] font-bold rounded-lg uppercase tracking-wider border ${gender?.toLowerCase() === 'female'
                                 ? 'bg-pink-500/10 text-pink-300 border-pink-500/20'

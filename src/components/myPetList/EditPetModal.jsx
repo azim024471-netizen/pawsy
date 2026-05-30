@@ -1,72 +1,70 @@
 "use client";
 import React from "react";
-import { Button, FieldError, Form, Input, Label, Modal, TextArea, TextField, toast} from "@heroui/react";
-import {MdOutlineCategory, MdOutlineVaccines, MdOutlineWc} from "react-icons/md";
+import { Button, FieldError, Form, Input, Label, Modal, TextArea, TextField, toast } from "@heroui/react";
+import { MdOutlineCategory, MdOutlineVaccines, MdOutlineWc } from "react-icons/md";
 import { FaEdit, FaPaw } from "react-icons/fa";
 import { CgEditContrast } from "react-icons/cg";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 
 
-const EditPetModal =  ({pet}) => { 
+const EditPetModal = ({ pet }) => {
   const router = useRouter();
 
-          const {_id,petName, description, species,breed,age, gender, image,
-            healthStatus,vaccinationStatus, location, adoptionFee } = pet;
-        
-            // console.log(pet, 'from updatae modal page')
+  const { _id, petName, description, species, breed, age, gender, image,
+    healthStatus, vaccinationStatus, location, adoptionFee } = pet;
 
-  const onSubmit = async(e) => {
-    
+
+  const onSubmit = async (e) => {
+
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
     const updateData = Object.fromEntries(formData);
     console.log(updateData, 'from  edit modal form');
-    
 
 
-  try {
-     const {data:tokenData} = await authClient.token();
-           const token = tokenData?.token;
-           
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allpets/${_id}`, {
-      method : "PATCH",
-       headers: { 'Content-Type': 'application/json',
-                                      'authorization' : `Bearer ${token}`
 
-                   },
-                body: JSON.stringify(updateData)
-    }) ;
-    
- const data = await res.json();
- console.log(data, 'data after upateeeeeeeeeeeeeeeeee')
+    try {
+      const { data: tokenData } = await authClient.token();
+      const token = tokenData?.token;
 
-            if (data.modifiedCount > 0) {
-                toast.success("Pet Updated", {
-                   description: `You have successfully update ${petName}'s info.`,
-                    actionProps: {
-                        children: "Close",
-                        // onPress: noop,
-                        variant: "flat",
-                    },
-                });
-                
-                router.push('/dashboard/listings');
-                router.refresh();
-            } else {
-                toast.warning("Could No Update", {
-                    description: "You have to change at last one thing to update.",
-                });
-            }
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allpets/${_id}`, {
+        method: "PATCH",
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': `Bearer ${token}`
 
-        } catch(error){
-            toast.danger("Update Failed", {
-                    description: "Something went wrong. Please try again later.",
-                    indicator: true,
-                        });
+        },
+        body: JSON.stringify(updateData)
+      });
 
-                        }
+      const data = await res.json();
+
+      if (data.modifiedCount > 0) {
+        toast.success("Pet Updated", {
+          description: `You have successfully update ${petName}'s info.`,
+          actionProps: {
+
+            variant: "flat",
+          },
+        });
+
+        router.push('/dashboard/listings');
+        router.refresh();
+      } else {
+        toast.warning("Could No Update", {
+          description: "You have to change at last one thing to update.",
+        });
+      }
+
+    } catch (error) {
+      toast.danger("Update Failed", {
+        description: "Something went wrong. Please try again later.",
+        indicator: true,
+      });
+
+    }
   };
 
 
@@ -79,13 +77,13 @@ const EditPetModal =  ({pet}) => {
   return (
     <Modal>
 
-             <Button className="w-full bg-white/5 hover:bg-[#FFEFD5] 
+      <Button className="w-full bg-white/5 hover:bg-[#FFEFD5] 
           text-[#FFEFD5] hover:text-[#3D2516] 
             border-[#2e1e14] font-bold py-1.5 rounded-lg transition-all border flex items-center
            justify-center
                    gap-1 text-[11px] active:scale-[0.97]">
         <FaEdit className="text-[#FFEFD5]/70 hover:text-[#3D2516] text-xs" />  Edit Pet
-           </Button> 
+      </Button>
 
       <Modal.Backdrop
         variant="blur"
@@ -172,7 +170,7 @@ const EditPetModal =  ({pet}) => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
 
                   <TextField
-                  defaultValue={breed}
+                    defaultValue={breed}
                     isRequired
                     name="breed"
                     className="w-full"
@@ -225,7 +223,7 @@ const EditPetModal =  ({pet}) => {
                   </div>
 
                   <TextField
-                  defaultValue={image}
+                    defaultValue={image}
                     isRequired
                     name="image"
                     className="w-full"
@@ -301,7 +299,7 @@ const EditPetModal =  ({pet}) => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
 
                   <TextField
-                  defaultValue={location}
+                    defaultValue={location}
                     isRequired
                     name="location"
                     className="w-full"
@@ -314,7 +312,7 @@ const EditPetModal =  ({pet}) => {
                   </TextField>
 
                   <TextField
-                  defaultValue={adoptionFee}
+                    defaultValue={adoptionFee}
                     isRequired
                     type="number"
                     name="adoptionFee"
@@ -337,7 +335,7 @@ const EditPetModal =  ({pet}) => {
                   <div className="p-3 bg-[#eecbb3] border border-white/10 rounded-xl focus-within:border-white transition-all">
 
                     <TextArea
-                    defaultValue={description}
+                      defaultValue={description}
                       required
                       name="description"
                       placeholder="Write details about the pet's behavior, history, etc..."

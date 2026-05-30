@@ -11,41 +11,41 @@ import { FcGoogle } from 'react-icons/fc';
 const SignInPage = () => {
 
     const signIn = async () => {
-   await authClient.signIn.social({
-    provider: "google",
-  });
-};
+        await authClient.signIn.social({
+            provider: "google",
+        });
+    };
 
-  const router = useRouter();
+    const router = useRouter();
 
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const userData = Object.fromEntries(formData.entries());
 
-                const {  email, password} = userData;
-                 const { data, error } = await authClient.signIn.email({
-    email: email, 
-    password: password, 
-    rememberMe: true,
-});
-           
-      
+        const { email, password } = userData;
+        const { data, error } = await authClient.signIn.email({
+            email: email,
+            password: password,
+            rememberMe: true,
+        });
 
-               if (error) {
+
+
+        if (error) {
             toast.danger("Error: " + (error.message || "Something went wrong!"));
         } else {
             toast.success("Login successful! Welcome back to Pawsy.", {
-    actionProps: {
-        className: "bg-success text-success-foreground",
-       
-    },
-    description: "You have logged in successfully.",
-});
+                actionProps: {
+                    className: "bg-success text-success-foreground",
 
-        router.push("/");}
+                },
+                description: "You have logged in successfully.",
+            });
 
-        // console.log(data, error, 'data from  mongo')
+            router.push("/");
+        }
+
     };
 
     return (
@@ -67,7 +67,7 @@ const SignInPage = () => {
                         Pawsy <FaPaw className="text-sm text-[#FFEFD5]/80" />
                     </p>
                     <p className='text-xs sm:text-sm text-[#FFEFD5]/70 font-medium tracking-tight'>
-                    Sign in your account to get started</p>
+                        Sign in your account to get started</p>
                 </div>
 
                 <Form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
@@ -116,8 +116,8 @@ const SignInPage = () => {
 
                     <div className="flex gap-2 mt-2">
                         <Button type="submit" className='w-full bg-[#FFEFD5] text-[#3a2d17] font-bold hover:bg-[#ffe6b3] transition-all'>
-                      Sign In            
-                    </Button>
+                            Sign In
+                        </Button>
                     </div>
                 </Form>
 
@@ -136,8 +136,8 @@ const SignInPage = () => {
                 </div>
 
                 <p className="text-center text-xs sm:text-sm font-medium text-[#FFEFD5]/60 mt-6">
-                   Don't have an account? Sign Up <Link href="/auth/signup"
-                    className="text-[#FFEFD5] font-extrabold underline hover:text-[#ffe6b3] pl-1">Sign UP</Link>
+                    Don't have an account? Sign Up <Link href="/auth/signup"
+                        className="text-[#FFEFD5] font-extrabold underline hover:text-[#ffe6b3] pl-1">Sign UP</Link>
                 </p>
             </Card>
         </div>

@@ -1,4 +1,3 @@
-// 'jwt done///////////////////////////////////'
 'use client'
 import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button,  toast } from "@heroui/react";

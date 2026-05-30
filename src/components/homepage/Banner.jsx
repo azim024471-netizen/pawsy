@@ -8,7 +8,7 @@ import { motion } from 'motion/react';
 
 const Banner = () => {
   return (
-    <section className="bg-[#140d04] text-[#eee2da] min-h-[600px] 
+    <section className="bg-[#140d04] text-[#eee2da] min-h-150 
     flex items-center py-12 lg:py-20 overflow-hidden select-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">

@@ -1,23 +1,19 @@
 
-// /complete jwtttttttttttttttttttt ///////////////
 "use client";
 import React from "react";
-import { Button, FieldError, Form, Input, Label, Modal, TextArea, TextField, toast} from "@heroui/react";
-import {  FaPaw } from "react-icons/fa";
+import { Button, FieldError, Form, Input, Label, Modal, TextArea, TextField, toast } from "@heroui/react";
+import { FaPaw } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 
+const AdoptionForm = ({ pet, user }) => {
+  const { name, id, email } = user;
 
-const AdoptionForm =  ({pet, user}) => {
-    // console.log(user) 
-    const {name, id, email} = user;
-    
   const router = useRouter();
 
-          const {_id,petName,   } = pet;
-            // console.log(pet, 'from updatae modal page')
+  const { _id, petName, } = pet;
 
-  const onSubmit = async(e) => {
+  const onSubmit = async (e) => {
 
     e.preventDefault();
 
@@ -25,74 +21,66 @@ const AdoptionForm =  ({pet, user}) => {
     const formData = new FormData(e.currentTarget);
     const requestData = Object.fromEntries(formData);
     console.log(requestData, 'from  edit modal form');
-    
+
     const adoptionRequest = {
-        ...requestData, 
-        applicantId : id,
-        petId : _id,
-        status: "Pending", 
-    requestedAt: new Date(),
+      ...requestData,
+      applicantId: id,
+      petId: _id,
+      status: "Pending",
+      requestedAt: new Date(),
     }
 
-    // console.log(adoptionRequest)
 
-  try {
-    const {data:tokenData} = await authClient.token();
-       const token = tokenData?.token;
-      //  console.log(token, 'form boookgggggggggggggggggggg')
-
-           
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adoption-requests`, {
-      method : "POST",
-       headers: { 'Content-Type': 'application/json',
-                   'authorization' : `Bearer ${token}`
-                },
-                body: JSON.stringify(adoptionRequest)
-    }) ;
-    
- const data = await res.json();
-//  console.log(data, 'data after upateeeeeeeeeeeeeeeeee')
-
-            if (data.insertedId) {
-                toast.success("Pet Updated", {
-      description: `You have successfully sent an adoption request for ${petName}.`,           
-         actionProps: {
-                        children: "Close",
-                        // onPress: noop,
-                        variant: "flat",
-                    },
-                });
-                
-                router.push('/all-pets');
-                router.refresh();
-            } else {
-                toast.warning("Submission Failed", {
-                    description: "Something went wrong. Please try again later.",
-                });
-            }
-
-        } catch(error){
-            toast.danger("Submission Failed", {
-                    description: "Something went wrong. Please try again later.",
-                    indicator: true,
-                        });
-
-                        };
-  
-
-}
+    try {
+      const { data: tokenData } = await authClient.token();
+      const token = tokenData?.token;
 
 
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adoption-requests`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(adoptionRequest)
+      });
 
+      const data = await res.json();
+
+      if (data.insertedId) {
+        toast.success("Pet Updated", {
+          description: `You have successfully sent an adoption request for ${petName}.`,
+          actionProps: {
+            variant: "flat",
+          },
+        });
+
+        router.push('/all-pets');
+        router.refresh();
+      } else {
+        toast.warning("Submission Failed", {
+          description: "Something went wrong. Please try again later.",
+        });
+      }
+
+    } catch (error) {
+      toast.danger("Submission Failed", {
+        description: "Something went wrong. Please try again later.",
+        indicator: true,
+      });
+
+    };
+
+  }
 
   return (
     <Modal>
-             <Button  className="flex items-center 
+      <Button className="flex items-center 
         justify-center gap-2 bg-[#FFEFD5] hover:bg-[#FFEFD5]/90
          text-[#3D2516] text-xs font-black uppercase tracking-wider px-4 py-2 rounded-xl transition-all shadow-md active:scale-[0.9]
           w-full sm:w-auto shrink-0">
-         <FaPaw className="text-xs" />Request to Adopt
-           </Button> 
+        <FaPaw className="text-xs" />Request to Adopt
+      </Button>
 
       <Modal.Backdrop
         variant="blur"
@@ -109,11 +97,11 @@ const AdoptionForm =  ({pet, user}) => {
               </Modal.Icon>
 
               <Modal.Heading className="text-[#FFEFD5]">
-               Request to Adopt {petName?.toUpperCase()}
+                Request to Adopt {petName?.toUpperCase()}
               </Modal.Heading>
 
               <p className="mt-1.5 text-sm leading-5 text-[#FFEFD5]/70">
-Please fill out the form to send an adoption request.       </p>
+                Please fill out the form to send an adoption request.       </p>
             </Modal.Header>
 
             <Modal.Body className="p-6 max-h-[75vh] overflow-y-auto">
@@ -125,30 +113,30 @@ Please fill out the form to send an adoption request.       </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
 
-                  <TextField      isReadOnly   defaultValue={petName?.toUpperCase()} name="petName" >
+                  <TextField isReadOnly defaultValue={petName?.toUpperCase()} name="petName" >
                     <Label className="text-xs font-bold text-[#FFEFD5]/90 tracking-wider pl-1 mb-1.5 block">
                       PET NAME
                     </Label>
-                     <Input className="bg-[#584131] text-[#FFEFD5] font-semibold"/>
+                    <Input className="bg-[#584131] text-[#FFEFD5] font-semibold" />
                     <FieldError className="text-red-500 text-xs mt-1" />
                   </TextField>
 
-                  
 
-                    <TextField
+
+                  <TextField
                     isReadOnly
-                       defaultValue={name?.toUpperCase()}   
+                    defaultValue={name?.toUpperCase()}
                     name="applicantName"
                     className="w-full">
                     <Label className="text-xs font-bold text-[#FFEFD5] tracking-wider pl-1 mb-1.5 block">
-                        USER NAME  </Label>
-                    <Input className="bg-[#584131] text-[#FFEFD5]"/>
+                      USER NAME  </Label>
+                    <Input className="bg-[#584131] text-[#FFEFD5]" />
                   </TextField>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
 
-                
+
 
                   <TextField
                     isReadOnly
@@ -160,29 +148,29 @@ Please fill out the form to send an adoption request.       </p>
                       USER EMAIL
                     </Label>
 
-                 <Input className="bg-[#584131] text-[#FFEFD5] font-semibold"/>
+                    <Input className="bg-[#584131] text-[#FFEFD5] font-semibold" />
 
                   </TextField>
 
 
-                   <TextField
+                  <TextField
                     isRequired
                     type="date"
                     name="pickup_date"
                     className="w-full"
                   >
                     <Label className="text-xs font-bold text-[#FFEFD5]/90 uppercase tracking-wider pl-1 mb-1.5 block">
-                       PICKUP DATE
+                      PICKUP DATE
                     </Label>
 
-                    <Input  />
+                    <Input />
                   </TextField>
 
 
 
                 </div>
 
-              
+
 
 
                 <div className="w-full">

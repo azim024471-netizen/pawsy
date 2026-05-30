@@ -1,4 +1,3 @@
-// 'done jwt/////////////////'
 'use client'
 import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button,  toast } from "@heroui/react";
@@ -29,8 +28,7 @@ const DeletePetModal = ({pet}) => {
                 toast.success("Pet Removed", {
                     description: `${petName} has been successfully removed from your  Pet listings.`,
                     actionProps: {
-                        children: "Close",
-                        // onPress: noop,
+                        
                         variant: "flat",
                     },
                 });

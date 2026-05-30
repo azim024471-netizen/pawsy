@@ -3,14 +3,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { FaEye,   FaMapMarkerAlt, FaPaw } from 'react-icons/fa';
+import { FaEye, FaMapMarkerAlt, FaPaw } from 'react-icons/fa';
 import EditPetModal from './EditPetModal';
 import DeletePetModal from './DeletePetModal';
 import GetRequests from './GetRequests';
 
 const PetListCard = ({ pet }) => {
 
-    const {_id,petName, species,breed,age, gender, image,healthStatus,vaccinationStatus,location, adoptionFee } = pet;
+    const { _id, petName, species, breed, age, gender, image, healthStatus, vaccinationStatus, location, adoptionFee } = pet;
 
     return (
         <div className="bg-[#3a2d17] border-b-3 border-r-2
@@ -30,10 +30,9 @@ const PetListCard = ({ pet }) => {
             <div className="p-5 flex flex-col gap-4">
 
                 <div>
-                    <h2 className="text-2xl font-extrabold text-[#FFEFD5] 
-                    flex items-center gap-2">
+                    <h2 className="text-2xl font-extrabold text-[#FFEFD5] flex items-center gap-2">
                         <FaPaw />
-                        {petName}
+                        {petName?.toUpperCase()}
                     </h2>
 
                     <p className="text-[#FFEFD5]/70 text-sm mt-1">
@@ -43,25 +42,25 @@ const PetListCard = ({ pet }) => {
 
                 <div className="space-y-2  flex justify-between text-sm text-[#FFEFD5]/85">
 
-                  <div className='space-y-1'>
-                      <p>
-                        <span className="font-bold text-[#FFEFD5]">Age:</span> {age}
-                    </p>
+                    <div className='space-y-1'>
+                        <p>
+                            <span className="font-bold text-[#FFEFD5]">Age:</span> {age}
+                        </p>
 
-                    <p>
-                        <span className="font-bold text-[#FFEFD5]">Health:</span> {healthStatus}
-                    </p>
-                  </div>
+                        <p>
+                            <span className="font-bold text-[#FFEFD5]">Health:</span> {healthStatus}
+                        </p>
+                    </div>
 
                     <div className='space-y-1'>
                         <p>
-                        <span className="font-bold text-[#FFEFD5]">Vaccination:</span> {vaccinationStatus}
-                    </p>
+                            <span className="font-bold text-[#FFEFD5]">Vaccination:</span> {vaccinationStatus}
+                        </p>
 
-                    <p className="flex items-center gap-2">
-                        <FaMapMarkerAlt />
-                        {location}
-                    </p>
+                        <p className="flex items-center gap-2">
+                            <FaMapMarkerAlt />
+                            {location}
+                        </p>
                     </div>
 
                 </div>
@@ -70,13 +69,13 @@ const PetListCard = ({ pet }) => {
                     ${adoptionFee}
                 </div>
 
-                 <div className="grid grid-cols-2 gap-2">
-
-                   
+                <div className="grid grid-cols-2 gap-2">
 
 
-  <GetRequests pet={pet}></GetRequests>
-           
+
+
+                    <GetRequests pet={pet}></GetRequests>
+
 
                     <Link href={`/all-pets/${_id}`} className="w-full">
                         <button className="w-full bg-white/5 hover:bg-green-600 text-[#FFEFD5
@@ -87,10 +86,10 @@ const PetListCard = ({ pet }) => {
                         </button>
                     </Link>
 
-            
-                      <EditPetModal pet={pet}></EditPetModal>
- 
-                  
+
+                    <EditPetModal pet={pet}></EditPetModal>
+
+
 
                     <DeletePetModal pet={pet}></DeletePetModal>
 

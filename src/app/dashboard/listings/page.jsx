@@ -8,41 +8,35 @@ import React from 'react';
 import { FaPaw, FaCheckCircle, FaHeart } from 'react-icons/fa';
 
 const MyListingPage = async () => {
-    
 
-     const session = await auth.api.getSession({
-    headers: await headers()
-  });
-    
 
-  
-      const {token} = await auth.api.getToken({
-          headers : await headers()
-      })
-        
-    //   const token = tokenObj?.token;
+    const session = await auth.api.getSession({
+        headers: await headers()
+    });
 
-//   const token = session?.token;
-  const userId = session?.user?.id
-   
-//   console.log(userId)
- 
+    const { token } = await auth.api.getToken({
+        headers: await headers()
+    })
+
+
+    const userId = session?.user?.id
+
 
     const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/myPets/${userId}`,
         {
             cache: 'no-store',
-             headers :{
-                         'authorization' :`Bearer ${token}`
-                    }
+            headers: {
+                'authorization': `Bearer ${token}`
+            }
         }
-        
+
     );
 
     const petLists = await res.json();
 
-const totalListings = Array.isArray(petLists) ? petLists.length : 0;
-   
+    const totalListings = Array.isArray(petLists) ? petLists.length : 0;
+
 
 
     return (
@@ -62,10 +56,10 @@ const totalListings = Array.isArray(petLists) ? petLists.length : 0;
                             </p>
                         </div>
 
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full lg:w-auto">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full lg:w-auto">
 
-                            
-    <div className="bg-[#2A190E]/60 rounded-2xl p-4 border border-[#3D2516] shadow-lg flex items-center gap-3.5 min-w-45">
+
+                            <div className="bg-[#2A190E]/60 rounded-2xl p-4 border border-[#3D2516] shadow-lg flex items-center gap-3.5 min-w-45">
                                 <div className="w-11 h-11 rounded-xl bg-[#FFEFD5] flex items-center justify-center text-[#3D2516]
                                  text-lg shadow-md shrink-0">
                                     <FaPaw />
@@ -96,17 +90,17 @@ const totalListings = Array.isArray(petLists) ? petLists.length : 0;
                                 </div>
                             </div>
 
-        <div className="bg-[#2A190E]/60 rounded-2xl p-4 
+                            <div className="bg-[#2A190E]/60 rounded-2xl p-4 
         border border-[#3D2516] shadow-lg flex items-center gap-3.5 min-w-45">
                                 <div className="w-11 h-11 rounded-xl bg-pink-500/10 border border-pink-500/20 flex
                                  items-center justify-center text-pink-400 text-lg shrink-0">
                                     <FaHeart />
                                 </div>
-                        <div className="truncate">
+                                <div className="truncate">
                                     <p className="text-[#FFEFD5]/60 text-[10px] uppercase tracking-wider font-bold">
                                         Adopted
-                            </p>
-                        <h2 className="text-2xl font-black text-pink-400 mt-0.5"> 45 </h2>
+                                    </p>
+                                    <h2 className="text-2xl font-black text-pink-400 mt-0.5"> 45 </h2>
                                 </div>
                             </div>
 
@@ -120,7 +114,7 @@ const totalListings = Array.isArray(petLists) ? petLists.length : 0;
                          text-center shadow-xl backdrop-blur-sm">
                             <div className="w-25 h-25 bg-[#FFEFD5] border border-white/10 
                             rounded-xl flex items-center justify-center mx-auto mb-4 text-white/40">
-                               <Image height={60} width={60} src={'/paw.png'} alt='logo'></Image>
+                                <Image height={60} width={60} src={'/paw.png'} alt='logo'></Image>
                             </div>
                             <h2 className="text-xl font-bold text-[#FFEFD5]">
                                 No Pets Listed Yet

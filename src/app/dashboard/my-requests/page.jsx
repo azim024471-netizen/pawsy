@@ -1,21 +1,5 @@
 
 
-
-
-// // "_id": "6a1058ec90582cdbdb778b06",
-// // "petName": "PAW",
-// // "applicantName": "DAVID",
-// // "applicantEmail": "azim2@gmail.com",
-// // "pickup_date": "2026-04-28",
-// // "message": "ddd",
-// // "applicantId": "6a0cc87ada0ea565c2efd197",
-// // "petId": "6a0ea2f96f236755a2d94da9",
-// // "status": "pending",
-// // "requestedAt": "2026-05-22T13:23:56.709Z"
-
-
-
-
 import RequestCard from '@/components/adopttion/RequestCard';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
@@ -23,29 +7,26 @@ import React from 'react';
 import { FaPaw } from 'react-icons/fa';
 
 const MyRequestsPage = async () => {
-    
-        const tokenObj = await auth.api.getToken({
-            headers : await headers()
-        })
-        const token = tokenObj?.token;
-    
-     const session = await auth.api.getSession({
-    headers: await headers()
-  });
 
-  const userId = session?.user?.id
+    const tokenObj = await auth.api.getToken({
+        headers: await headers()
+    })
+    const token = tokenObj?.token;
 
-     
-//   console.log(user, 'jidddddddddddddddddddddddddddddddddddddd')
-   
+    const session = await auth.api.getSession({
+        headers: await headers()
+    });
+
+    const userId = session?.user?.id
+
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adoption-requests/${userId}`, {
         cache: 'no-store',
-      headers :{
-                   'authorization' :`Bearer ${token}`
-              }
+        headers: {
+            'authorization': `Bearer ${token}`
+        }
     });
     const myRequests = await res.json();
-    console.log(myRequests, 'new ssssssssssssssssssssssssssssssss')
 
     const totalRequests = myRequests.length;
     const pendingRequests = myRequests.filter(req => req.status === 'Pending').length;
@@ -57,7 +38,7 @@ const MyRequestsPage = async () => {
             <div className="mb-8">
                 <span className="bg-[#EAB308]/10 text-[#EAB308] text-xs px-3 py-1 rounded-full font-semibold  inline-flex gap-2 items-center
                  tracking-wider border border-[#463a1e]">
-                <FaPaw></FaPaw> MY REQUESTS
+                    <FaPaw></FaPaw> MY REQUESTS
                 </span>
                 <h1 className="text-3xl md:text-4xl font-extrabold mt-3 tracking-tight text-white">
                     My <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FACC15] via-[#EAB308] to-[#CA8A04]">Adoption Requests</span>
@@ -66,48 +47,48 @@ const MyRequestsPage = async () => {
             </div>
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
- <div className="bg-[#1C160C] border border-[#3A2E1A] p-5 rounded-2xl text-center shadow-lg transition-all hover:border-[#635120]">
+                <div className="bg-[#1C160C] border border-[#3A2E1A] p-5 rounded-2xl text-center shadow-lg transition-all hover:border-[#635120]">
                     <span className="text-3xl font-black block text-[#FACC15]">{totalRequests}</span>
                     <span className="text-xs font-semibold text-[#D4C3A3] tracking-wider mt-1 block">TOTAL</span>
                 </div>
- <div className="bg-[#1C160C] border border-[#3A2E1A] p-5 rounded-2xl text-center shadow-lg transition-all hover:border-[#635120]">
+                <div className="bg-[#1C160C] border border-[#3A2E1A] p-5 rounded-2xl text-center shadow-lg transition-all hover:border-[#635120]">
                     <span className="text-3xl font-black block text-[#EAB308]">{pendingRequests}</span>
                     <span className="text-xs font-semibold text-[#D4C3A3] uppercase tracking-wider mt-1 block">PENDING</span>
                 </div>
- <div className="bg-[#1C160C] border border-[#3A2E1A] p-5 rounded-2xl text-center shadow-lg transition-all hover:border-[#635120]">
+                <div className="bg-[#1C160C] border border-[#3A2E1A] p-5 rounded-2xl text-center shadow-lg transition-all hover:border-[#635120]">
                     <span className="text-3xl font-black block text-green-500">{approvedRequests}</span>
                     <span className="text-xs font-semibold text-[#D4C3A3] uppercase tracking-wider mt-1 block">APPROVED</span>
                 </div>
- <div className="bg-[#1C160C] border border-[#3A2E1A] p-5 rounded-2xl text-center shadow-lg transition-all hover:border-[#635120]">
+                <div className="bg-[#1C160C] border border-[#3A2E1A] p-5 rounded-2xl text-center shadow-lg transition-all hover:border-[#635120]">
                     <span className="text-3xl font-black block text-rose-500">{rejectedRequests}</span>
                     <span className="text-xs font-semibold text-[#D4C3A3] uppercase tracking-wider mt-1 block">Rejected</span>
                 </div>
             </div>
 
             <div className="bg-[#1C160C] border border-[#3A2E1A] rounded-2xl overflow-hidden shadow-xl">
-                
-                {
-                    totalRequests === 0 ?<>  <div className="p-10  flex items-center justify-center gap-3 text-[#D4C3A3]/60 text-xl">
-                            You haven't submitted any adoption requests yet.<FaPaw></FaPaw>
-                        </div></> 
-                        :
-                         <><div className="hidden md:grid grid-cols-5 gap-4 px-6 py-4 bg-[#271E10]
-                 border-b border-[#3A2E1A] text-xs font-bold  tracking-wider text-[#F59E0B]">
-                    <div>PET NAME</div>
-                    <div>REQUEST DATE</div>
-                    <div>PICKUP DATE</div>
-                    <div className="text-center">Status</div>
-                    <div className="text-center">Actions</div>
-                    
-                </div>
 
-                <div className="divide-y divide-[#3A2E1A]/60">
-                    {
-                        myRequests.map(request => (
-                            <RequestCard key={request._id} request={request} />))
-                        
-                    }
-                </div></>
+                {
+                    totalRequests === 0 ? <>  <div className="p-10  flex items-center justify-center gap-3 text-[#D4C3A3]/60 text-xl">
+                        You haven't submitted any adoption requests yet.<FaPaw></FaPaw>
+                    </div></>
+                        :
+                        <><div className="hidden md:grid grid-cols-5 gap-4 px-6 py-4 bg-[#271E10]
+                 border-b border-[#3A2E1A] text-xs font-bold  tracking-wider text-[#F59E0B]">
+                            <div>PET NAME</div>
+                            <div>REQUEST DATE</div>
+                            <div>PICKUP DATE</div>
+                            <div className="text-center">Status</div>
+                            <div className="text-center">Actions</div>
+
+                        </div>
+
+                            <div className="divide-y divide-[#3A2E1A]/60">
+                                {
+                                    myRequests.map(request => (
+                                        <RequestCard key={request._id} request={request} />))
+
+                                }
+                            </div></>
                 }
 
             </div>

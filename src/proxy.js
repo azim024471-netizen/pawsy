@@ -17,7 +17,7 @@ return NextResponse.next()
 
  
 export const config = {
-matcher: ['/all-pets/:path+', '/profile'],
+matcher: ['/all-pets/:path+', '/profile','/dashboard/listings', '/dashboard/my-requests', '/add-pets'],
 
 
 }

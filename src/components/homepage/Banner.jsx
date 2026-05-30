@@ -25,7 +25,7 @@ const Banner = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-4xl sm:text-5xl lg:text-7xl font-serif font-black tracking-tight leading-[1.1]"
+                className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.1]"
               >
                 Find Your New <br />
                 Best Friend <br />
@@ -187,7 +187,6 @@ const Banner = () => {
                   </div>
                 </motion.div>
 
-                {/* Badge */}
                 <motion.div
                   animate={{
                     rotate: [-15, -10, -15],

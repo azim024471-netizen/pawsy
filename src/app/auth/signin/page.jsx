@@ -10,6 +10,12 @@ import { FcGoogle } from 'react-icons/fc';
 
 const SignInPage = () => {
 
+    const signIn = async () => {
+   await authClient.signIn.social({
+    provider: "google",
+  });
+};
+
   const router = useRouter();
 
     const onSubmit = async (e) => {
@@ -122,7 +128,7 @@ const SignInPage = () => {
                 </div>
 
                 <div className='flex items-center gap-4'>
-                    <Button
+                    <Button onClick={signIn}
                         className="w-full h-11 bg-white/5 text-[#FFEFD5] border border-white/10 hover:bg-white/10 font-bold px-5 py-2.5 rounded-xl transition-all duration-300 text-sm shadow-sm flex items-center justify-center gap-2"
                     >
                         <FcGoogle className="text-lg" /> Google
